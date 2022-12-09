@@ -2,22 +2,22 @@
 if ( !defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
 /**
- * Class Disciple_Tools_Plugin_Starter_Template_Base
+ * Class Disciple_Tools_Social_Media_Manager_Base
  * Load the core post type hooks into the Disciple.Tools system
  */
-class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
+class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
 
     /**
      * Define post type variables
      * @todo update these variables with your post_type, module key, and names.
      * @var string
      */
-    public $post_type = 'starter_post_type';
+    public $post_type = 'social_media_manager_post_type';
     public $module = 'starter_base';
     public $single_name = 'Starter';
     public $plural_name = 'Starters';
     public static function post_type(){
-        return 'starter_post_type';
+        return 'social_media_manager_post_type';
     }
 
     private static $_instance = null;
@@ -60,8 +60,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
     }
 
     public function after_setup_theme(){
-        $this->single_name = __( 'Starter', 'disciple-tools-plugin-starter-template' );
-        $this->plural_name = __( 'Starters', 'disciple-tools-plugin-starter-template' );
+        $this->single_name = __( 'Starter', 'disciple-tools-social-media-manager' );
+        $this->plural_name = __( 'Starters', 'disciple-tools-social-media-manager' );
 
         if ( class_exists( 'Disciple_Tools_Post_Type_Template' ) ) {
             new Disciple_Tools_Post_Type_Template( $this->post_type, $this->single_name, $this->plural_name );
@@ -76,8 +76,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
      */
     public function dt_get_post_type_settings( $settings, $post_type ){
         if ( $post_type === $this->post_type ){
-            $settings['label_singular'] = __( 'Starter', 'disciple-tools-plugin-starter-template' );
-            $settings['label_plural'] = __( 'Starters', 'disciple-tools-plugin-starter-template' );
+            $settings['label_singular'] = __( 'Starter', 'disciple-tools-social-media-manager' );
+            $settings['label_plural'] = __( 'Starters', 'disciple-tools-social-media-manager' );
         }
         return $settings;
     }
@@ -85,14 +85,14 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
     /**
      * @todo define the permissions for the roles
      * Documentation
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/Theme-Core/roles-permissions.md#rolesd
+     * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/roles-permissions.md#rolesd
      */
     public function dt_set_roles_and_permissions( $expected_roles ){
 
         if ( !isset( $expected_roles['multiplier'] ) ){
             $expected_roles['multiplier'] = [
 
-                'label' => __( 'Multiplier', 'disciple-tools-plugin-starter-template' ),
+                'label' => __( 'Multiplier', 'disciple-tools-social-media-manager' ),
                 'description' => 'Interacts with Contacts and Groups',
                 'permissions' => []
             ];
@@ -122,7 +122,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
     /**
      * @todo define fields
      * Documentation
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/Theme-Core/fields.md
+     * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/fields.md
      */
     public function dt_custom_fields_settings( $fields, $post_type ){
         if ( $post_type === $this->post_type ){
@@ -134,18 +134,18 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
              * @todo modify strings and add elements to default array
              */
             $fields['status'] = [
-                'name'        => __( 'Status', 'disciple-tools-plugin-starter-template' ),
-                'description' => __( 'Set the current status.', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'Status', 'disciple-tools-social-media-manager' ),
+                'description' => __( 'Set the current status.', 'disciple-tools-social-media-manager' ),
                 'type'        => 'key_select',
                 'default'     => [
                     'inactive' => [
-                        'label' => __( 'Inactive', 'disciple-tools-plugin-starter-template' ),
-                        'description' => __( 'No longer active.', 'disciple-tools-plugin-starter-template' ),
+                        'label' => __( 'Inactive', 'disciple-tools-social-media-manager' ),
+                        'description' => __( 'No longer active.', 'disciple-tools-social-media-manager' ),
                         'color' => '#F43636'
                     ],
                     'active'   => [
-                        'label' => __( 'Active', 'disciple-tools-plugin-starter-template' ),
-                        'description' => __( 'Is active.', 'disciple-tools-plugin-starter-template' ),
+                        'label' => __( 'Active', 'disciple-tools-social-media-manager' ),
+                        'description' => __( 'Is active.', 'disciple-tools-social-media-manager' ),
                         'color' => '#4CAF50'
                     ],
                 ],
@@ -155,8 +155,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'show_in_table' => 10,
             ];
             $fields['assigned_to'] = [
-                'name'        => __( 'Assigned To', 'disciple-tools-plugin-starter-template' ),
-                'description' => __( 'Select the main person who is responsible for reporting on this record.', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'Assigned To', 'disciple-tools-social-media-manager' ),
+                'description' => __( 'Select the main person who is responsible for reporting on this record.', 'disciple-tools-social-media-manager' ),
                 'type'        => 'user_select',
                 'default'     => '',
                 'tile' => 'status',
@@ -170,7 +170,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
              * Common and recommended fields
              */
             $fields['start_date'] = [
-                'name'        => __( 'Start Date', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'Start Date', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type'        => 'date',
                 'default'     => time(),
@@ -178,7 +178,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'icon' => get_template_directory_uri() . '/dt-assets/images/date-start.svg',
             ];
             $fields['end_date'] = [
-                'name'        => __( 'End Date', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'End Date', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type'        => 'date',
                 'default'     => '',
@@ -186,21 +186,21 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'icon' => get_template_directory_uri() . '/dt-assets/images/date-end.svg',
             ];
             $fields['multi_select'] = [
-                'name' => __( 'Multi-Select', 'disciple-tools-plugin-starter-template' ),
-                'description' => __( 'Multi Select Field', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Multi-Select', 'disciple-tools-social-media-manager' ),
+                'description' => __( 'Multi Select Field', 'disciple-tools-social-media-manager' ),
                 'type' => 'multi_select',
                 'default' => [
                     'item_1' => [
-                        'label' => __( 'Item 1', 'disciple-tools-plugin-starter-template' ),
-                        'description' => __( 'Item 1.', 'disciple-tools-plugin-starter-template' ),
+                        'label' => __( 'Item 1', 'disciple-tools-social-media-manager' ),
+                        'description' => __( 'Item 1.', 'disciple-tools-social-media-manager' ),
                     ],
                     'item_2' => [
-                        'label' => __( 'Item 2', 'disciple-tools-plugin-starter-template' ),
-                        'description' => __( 'Item 2.', 'disciple-tools-plugin-starter-template' ),
+                        'label' => __( 'Item 2', 'disciple-tools-social-media-manager' ),
+                        'description' => __( 'Item 2.', 'disciple-tools-social-media-manager' ),
                     ],
                     'item_3' => [
-                        'label' => __( 'Item 3', 'disciple-tools-plugin-starter-template' ),
-                        'description' => __( 'Item 3.', 'disciple-tools-plugin-starter-template' ),
+                        'label' => __( 'Item 3', 'disciple-tools-social-media-manager' ),
+                        'description' => __( 'Item 3.', 'disciple-tools-social-media-manager' ),
                     ],
                 ],
                 'tile' => 'details',
@@ -214,8 +214,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
              * location elements
              */
             $fields['location_grid'] = [
-                'name'        => __( 'Locations', 'disciple-tools-plugin-starter-template' ),
-                'description' => __( 'The general location where this contact is located.', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'Locations', 'disciple-tools-social-media-manager' ),
+                'description' => __( 'The general location where this contact is located.', 'disciple-tools-social-media-manager' ),
                 'type'        => 'location',
                 'mapbox'    => false,
                 'in_create_form' => true,
@@ -223,8 +223,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'icon' => get_template_directory_uri() . '/dt-assets/images/location.svg',
             ];
             $fields['location_grid_meta'] = [
-                'name'        => __( 'Locations', 'disciple-tools-plugin-starter-template' ), //system string does not need translation
-                'description' => __( 'The general location where this record is located.', 'disciple-tools-plugin-starter-template' ),
+                'name'        => __( 'Locations', 'disciple-tools-social-media-manager' ), //system string does not need translation
+                'description' => __( 'The general location where this record is located.', 'disciple-tools-social-media-manager' ),
                 'type'        => 'location_meta',
                 'tile'      => 'details',
                 'mapbox'    => false,
@@ -232,7 +232,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'icon' => get_template_directory_uri() . '/dt-assets/images/location.svg?v=2',
             ];
             $fields['contact_address'] = [
-                'name' => __( 'Address', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Address', 'disciple-tools-social-media-manager' ),
                 'icon' => get_template_directory_uri() . '/dt-assets/images/house.svg',
                 'type' => 'communication_channel',
                 'tile' => 'details',
@@ -255,7 +255,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
              * generation and peer connection fields
              */
             $fields['parents'] = [
-                'name' => __( 'Parents', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Parents', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type' => 'connection',
                 'post_type' => $this->post_type,
@@ -266,7 +266,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
             ];
             $fields['peers'] = [
-                'name' => __( 'Peers', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Peers', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type' => 'connection',
                 'post_type' => $this->post_type,
@@ -277,7 +277,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
             ];
             $fields['children'] = [
-                'name' => __( 'Children', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Children', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type' => 'connection',
                 'post_type' => $this->post_type,
@@ -294,8 +294,8 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
              * Connections to other post types
              */
             $fields['peoplegroups'] = [
-                'name' => __( 'People Groups', 'disciple-tools-plugin-starter-template' ),
-                'description' => __( 'The people groups connected to this record.', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'People Groups', 'disciple-tools-social-media-manager' ),
+                'description' => __( 'The people groups connected to this record.', 'disciple-tools-social-media-manager' ),
                 'type' => 'connection',
                 'tile' => 'details',
                 'post_type' => 'peoplegroups',
@@ -305,7 +305,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
             ];
 
             $fields['contacts'] = [
-                'name' => __( 'Contacts', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'Contacts', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type' => 'connection',
                 'post_type' => 'contacts',
@@ -358,12 +358,12 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
 
     /**
      * @todo define tiles
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/Theme-Core/field-and-tiles.md
+     * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/field-and-tiles.md
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ){
         if ( $post_type === $this->post_type ){
-            $tiles['connections'] = [ 'label' => __( 'Connections', 'disciple-tools-plugin-starter-template' ) ];
-            $tiles['other'] = [ 'label' => __( 'Other', 'disciple-tools-plugin-starter-template' ) ];
+            $tiles['connections'] = [ 'label' => __( 'Connections', 'disciple-tools-social-media-manager' ) ];
+            $tiles['other'] = [ 'label' => __( 'Other', 'disciple-tools-social-media-manager' ) ];
         }
         return $tiles;
     }
@@ -371,7 +371,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
     /**
      * @todo define additional section content
      * Documentation
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/Theme-Core/field-and-tiles.md#add-custom-content
+     * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/field-and-tiles.md#add-custom-content
      */
     public function dt_details_additional_section( $section, $post_type ){
 
@@ -380,7 +380,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
             $post = DT_Posts::get_post( $this->post_type, get_the_ID() );
             ?>
             <div class="section-subheader">
-                <?php esc_html_e( 'Custom Section Contact', 'disciple-tools-plugin-starter-template' ) ?>
+                <?php esc_html_e( 'Custom Section Contact', 'disciple-tools-social-media-manager' ) ?>
             </div>
             <div>
                 <p>Add information or custom fields here</p>
@@ -451,7 +451,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
     /**
      * @todo adjust queries to support list counts
      * Documentation
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/Theme-Core/list-query.md
+     * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/list-query.md
      */
     private static function get_my_status(){
         /**
@@ -536,7 +536,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
 
             $filters['tabs'][] = [
                 'key' => 'assigned_to_me',
-                'label' => __( 'Assigned to me', 'disciple-tools-plugin-starter-template' ),
+                'label' => __( 'Assigned to me', 'disciple-tools-social-media-manager' ),
                 'count' => $total_my,
                 'order' => 20
             ];
@@ -544,7 +544,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
             $filters['filters'][] = [
                 'ID' => 'my_all',
                 'tab' => 'assigned_to_me',
-                'name' => __( 'All', 'disciple-tools-plugin-starter-template' ),
+                'name' => __( 'All', 'disciple-tools-social-media-manager' ),
                 'query' => [
                     'assigned_to' => [ 'me' ],
                     'sort' => 'status'
@@ -601,7 +601,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 }
                 $filters['tabs'][] = [
                     'key' => 'all',
-                    'label' => __( 'All', 'disciple-tools-plugin-starter-template' ),
+                    'label' => __( 'All', 'disciple-tools-social-media-manager' ),
                     'count' => $total_all,
                     'order' => 10
                 ];
@@ -609,7 +609,7 @@ class Disciple_Tools_Plugin_Starter_Template_Base extends DT_Module_Base {
                 $filters['filters'][] = [
                     'ID' => 'all',
                     'tab' => 'all',
-                    'name' => __( 'All', 'disciple-tools-plugin-starter-template' ),
+                    'name' => __( 'All', 'disciple-tools-social-media-manager' ),
                     'query' => [
                         'sort' => '-post_date'
                     ],

@@ -51,7 +51,7 @@ add_action( 'tgmpa_register', function() {
     //    $plugins[] = [
     //        'name' => 'Disciple.Tools Dashboard',
     //        'slug' => 'disciple-tools-dashboard',
-    //        'source' => 'https://github.com/DiscipleTools/disciple-tools-dashboard/releases/latest/download/disciple-tools-dashboard.zip',
+    //        'source' => 'https://github.com/thecodezone/disciple-tools-dashboard/releases/latest/download/disciple-tools-dashboard.zip',
     //        'required' => false
     //    ];
 

@@ -8,7 +8,7 @@ if ( !defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
  * @see https://zume.vision/maps/
  * These Zume maps are driven via a magic link from a Disciple Tools system.
  */
-class Disciple_Tools_Plugin_Starter_Template_Magic_Map_App extends DT_Magic_Url_Base
+class Disciple_Tools_Social_Media_Manager_Magic_Map_App extends DT_Magic_Url_Base
 {
     public $magic = false;
     public $parts = false;
@@ -96,7 +96,7 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_Map_App extends DT_Magic_Url_
                 'nonce' => wp_create_nonce( 'wp_rest' ),
                 'parts' => $this->parts,
                 'translations' => [
-                    'add' => __( 'Add Magic', 'disciple-tools-plugin-starter-template' ),
+                    'add' => __( 'Add Magic', 'disciple-tools-social-media-manager' ),
                 ],
             ]) ?>][0]
 
@@ -233,7 +233,7 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_Map_App extends DT_Magic_Url_
 
     /**
      * Register REST Endpoints
-     * @link https://github.com/DiscipleTools/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
+     * @link https://github.com/thecodezone/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
      */
     public function add_endpoints() {
         $namespace = $this->root . '/v1';
@@ -314,4 +314,4 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_Map_App extends DT_Magic_Url_
 
 
 }
-Disciple_Tools_Plugin_Starter_Template_Magic_Map_App::instance();
+Disciple_Tools_Social_Media_Manager_Magic_Map_App::instance();

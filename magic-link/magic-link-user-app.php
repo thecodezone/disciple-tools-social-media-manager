@@ -3,9 +3,9 @@ if ( !defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
 
 /**
- * Class Disciple_Tools_Plugin_Starter_Template_Magic_User_App
+ * Class Disciple_Tools_Social_Media_Manager_Magic_User_App
  */
-class Disciple_Tools_Plugin_Starter_Template_Magic_User_App extends DT_Magic_Url_Base {
+class Disciple_Tools_Social_Media_Manager_Magic_User_App extends DT_Magic_Url_Base {
 
     public $page_title = 'Starter - Magic Links - User App';
     public $page_description = 'User App - Magic Links.';
@@ -164,7 +164,7 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_User_App extends DT_Magic_Url
                 'nonce' => wp_create_nonce( 'wp_rest' ),
                 'parts' => $this->parts,
                 'translations' => [
-                    'add' => __( 'Add Magic', 'disciple-tools-plugin-starter-template' ),
+                    'add' => __( 'Add Magic', 'disciple-tools-social-media-manager' ),
                 ],
             ]) ?>][0]
 
@@ -277,7 +277,7 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_User_App extends DT_Magic_Url
 
     /**
      * Register REST Endpoints
-     * @link https://github.com/DiscipleTools/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
+     * @link https://github.com/thecodezone/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
      */
     public function add_endpoints() {
         $namespace = $this->root . '/v1';
@@ -355,4 +355,4 @@ class Disciple_Tools_Plugin_Starter_Template_Magic_User_App extends DT_Magic_Url
         return $data;
     }
 }
-Disciple_Tools_Plugin_Starter_Template_Magic_User_App::instance();
+Disciple_Tools_Social_Media_Manager_Magic_User_App::instance();

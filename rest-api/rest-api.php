@@ -1,11 +1,11 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
-class Disciple_Tools_Plugin_Starter_Template_Endpoints
+class Disciple_Tools_Social_Media_Manager_Endpoints
 {
     /**
      * @todo Set the permissions your endpoint needs
-     * @link https://github.com/DiscipleTools/Documentation/blob/master/theme-core/capabilities.md
+     * @link https://github.com/thecodezone/Documentation/blob/master/theme-core/capabilities.md
      * @var string[]
      */
     public $permissions = [ 'access_contacts', 'dt_all_access_contacts', 'view_project_metrics' ];
@@ -17,9 +17,9 @@ class Disciple_Tools_Plugin_Starter_Template_Endpoints
      * @todo defne method (CREATABLE, READABLE)
      * @todo apply permission strategy. '__return_true' essentially skips the permission check.
      */
-    //See https://github.com/DiscipleTools/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
+    //See https://github.com/thecodezone/disciple-tools-theme/wiki/Site-to-Site-Link for outside of wordpress authentication
     public function add_api_routes() {
-        $namespace = 'disciple-tools-plugin-starter-template/v1';
+        $namespace = 'disciple-tools-social-media-manager/v1';
 
         register_rest_route(
             $namespace, '/endpoint', [
@@ -60,4 +60,4 @@ class Disciple_Tools_Plugin_Starter_Template_Endpoints
         return $pass;
     }
 }
-Disciple_Tools_Plugin_Starter_Template_Endpoints::instance();
+Disciple_Tools_Social_Media_Manager_Endpoints::instance();

@@ -19,19 +19,19 @@ add_filter( 'dt_post_type_modules', function( $modules ){
      * @todo Add more modules by adding a new array element. i.e. 'starter_base_two'.
      */
     $modules['starter_base'] = [
-        'name' => __( 'Starter', 'disciple-tools-plugin-starter-template' ),
+        'name' => __( 'Starter', 'disciple-tools-social-media-manager' ),
         'enabled' => true,
         'locked' => true,
         'prerequisites' => [ 'contacts_base' ],
-        'post_type' => 'starter_post_type',
-        'description' => __( 'Default starter functionality', 'disciple-tools-plugin-starter-template' )
+        'post_type' => 'social_media_manager_post_type',
+        'description' => __( 'Default starter functionality', 'disciple-tools-social-media-manager' )
     ];
 
     return $modules;
 }, 20, 1 );
 
 require_once 'module-base.php';
-Disciple_Tools_Plugin_Starter_Template_Base::instance();
+Disciple_Tools_Social_Media_Manager_Base::instance();
 
 /**
  * @todo require_once and load additional modules
