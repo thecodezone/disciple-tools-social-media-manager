@@ -1,29 +1,16 @@
 ![Build Status](https://github.com/thecodezone/disciple-tools-social-media-manager/actions/workflows/ci.yml/badge.svg?branch=master)
 
-## Dev notes, delete me:
-
-This is a starter plugin to jumpstart your work with Disciple.Tools.
-Click the "Use this template" button above.
-See instructions for refactoring and getting started in the [wiki](https://github.com/thecodezone/disciple-tools-social-media-manager/wiki)
-See instructions for creating releases and publishing your plugin: [wiki](https://github.com/thecodezone/disciple-tools-social-media-manager/wiki)
-In order to display the banner correctly on the Disciple.Tools Community Plugins Site, don't change the 'Plugin Banner' text on line 12; only the URL.
-
-## readme format:
+# THIS IS A WORK IN PROGRESS AND NOT READY FOR USE YET.
 
 ![Plugin Banner](https://raw.githubusercontent.com/thecodezone/disciple-tools-social-media-manager/b30402d97895e3f911efcb47fb8f29ccd1eb92e5/documentation/banner.png)
 
 # Disciple.Tools - Social Media Manager Plugin
 
-Description Description Description Description Description Description Description
-Description Description Description Description Description Description Description
+This is a proof of concept for a Social Media Manager within Disciple Tools.
 
 ## Purpose
 
-Purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose
-Purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose
-
-Purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose
-Purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose purpose
+This plugin will connect to Facebook (and later other social media platforms) and allow conversations with contacts through social media.
 
 ## Usage
 
