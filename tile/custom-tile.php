@@ -29,7 +29,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ) {
         if ( $post_type === 'contacts' || $post_type === 'social_media_manager_post_type' ){
-            $tiles['disciple_tools_social_media_manager'] = [ 'label' => __( 'Social Media Manager Plugin', 'disciple-tools-social-media-manager' ) ];
+            $tiles['disciple_tools_social_media_manager'] = [ 'label' => __( 'Social Media Management', 'disciple-tools-social-media-manager' ) ];
             $tiles['a_beautiful_tile'] = [ 'label' => __( 'A Beautiful Tile', 'disciple-tools-social-media-manager' ) ];
         }
         return $tiles;
