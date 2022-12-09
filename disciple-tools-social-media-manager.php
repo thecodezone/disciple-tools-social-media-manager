@@ -134,7 +134,7 @@ class Disciple_Tools_Social_Media_Manager {
 
             $links_array[] = '<a href="https://disciple.tools">Disciple.Tools Community</a>';
 
-        return $links_array;
+            return $links_array;
         }
     }
 
@@ -292,20 +292,20 @@ if ( !function_exists( 'dt_hook_ajax_notice_handler' ) ){
  * @see https://github.com/thecodezone/disciple-tools-version-control/wiki/How-to-Update-the-Starter-Plugin
  */
 add_action( 'plugins_loaded', function (){
-   if ( is_admin() && !( is_multisite() && class_exists( "DT_Multisite" ) ) || wp_doing_cron() ){
-       // Check for plugin updates
-       if ( ! class_exists( 'Puc_v4_Factory' ) ) {
-           if ( file_exists( get_template_directory() . '/dt-core/libraries/plugin-update-checker/plugin-update-checker.php' )){
-               require( get_template_directory() . '/dt-core/libraries/plugin-update-checker/plugin-update-checker.php' );
-           }
-       }
-       if ( class_exists( 'Puc_v4_Factory' ) ){
-           Puc_v4_Factory::buildUpdateChecker(
-               'https://raw.githubusercontent.com/thecodezone/disciple-tools-social-media-manager/master/version-control.json',
-               __FILE__,
-               'disciple-tools-social-media-manager'
-           );
+    if ( is_admin() && !( is_multisite() && class_exists( 'DT_Multisite' ) ) || wp_doing_cron() ){
+        // Check for plugin updates
+        if ( ! class_exists( 'Puc_v4_Factory' ) ) {
+            if ( file_exists( get_template_directory() . '/dt-core/libraries/plugin-update-checker/plugin-update-checker.php' ) ){
+                require( get_template_directory() . '/dt-core/libraries/plugin-update-checker/plugin-update-checker.php' );
+            }
+        }
+        if ( class_exists( 'Puc_v4_Factory' ) ){
+            Puc_v4_Factory::buildUpdateChecker(
+                'https://raw.githubusercontent.com/thecodezone/disciple-tools-social-media-manager/master/version-control.json',
+                __FILE__,
+                'disciple-tools-social-media-manager'
+            );
 
-       }
-   }
+        }
+    }
 } );
