@@ -135,6 +135,7 @@ class Disciple_Tools_Social_Media_Manager {
             $links_array[] = '<a href="https://disciple.tools">Disciple.Tools Community</a>';
 
         return $links_array;
+        }
     }
 
     /**
