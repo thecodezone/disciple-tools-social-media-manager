@@ -259,7 +259,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
         /**
          * @todo set the post type and the section key that you created in the dt_details_additional_tiles() function
          */
-        if ( ( $post_type === 'contacts' || $post_type === 'smm_conversation' ) && $section === 'disciple_tools_social_media_manager' ){
+        if ( ( $post_type === 'smm_conversation' ) && $section === 'disciple_tools_social_media_manager' ){
             /**
              * These are two sets of key data:
              * $this_post is the details for this specific post
@@ -275,11 +275,74 @@ class Disciple_Tools_Social_Media_Manager_Tile
             @todo you can add HTML content to this section.
             -->
 
-            <div class="cell small-12 medium-4">
-                <!-- @todo remove this notes section-->
+            <?php
+            $fields = DT_Posts::get_post_field_settings( 'smm_conversation' );
 
+            $fake_conversation_data = [
+                [
+                    'id' => get_the_ID(),
+                    'name' => 'Conversation ' . get_the_ID(),
+                    'path' => 'https://www.facebook.com/1234567890/posts/1234567890',
+                    'platform' => 'Facebook',
+                    'date' => '2022-12-02',
+                    'status' => 'Open',
+                    'participants' => [
+                        [
+                            'id' => 1,
+                            'name' => 'Person 1',
+                            'path' => 'https://www.facebook.com/1234567890',
+                            'platform' => 'Facebook',
+                            'date' => '2022-12-02',
+                            'status' => 'Open',
+                        ],
+                        [
+                            'id' => 2,
+                            'name' => 'Person 2',
+                            'path' => 'https://www.facebook.com/1234567890',
+                            'platform' => 'Facebook',
+                            'date' => '2022-12-02',
+                            'status' => 'Open',
+                        ],
+                    ],
+                ],
+            ];
+
+            //This is adding the fake_conversation Data into the post
+            //@todo remove this when you have real data
+            $fields = DT_Posts::update_post( 'smm_conversation', get_the_ID(), [ 'conversations' => $fake_conversation_data ], true, false );
+
+            $conversation_post = DT_Posts::get_post( 'smm_conversation', get_the_ID() );
+            ?>
+
+            <div>
+                <ul class="smm-conversation-list">
+                    <?php foreach ( $conversation_post['conversations'] as $key => $value ):?>
+                        <li>
+                            <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
 
+        <?php }
+        if ( ( $post_type === 'contacts' ) && $section === 'disciple_tools_social_media_manager' ){
+            $this_post = DT_Posts::get_post( $post_type, get_the_ID() );
+            $post_type_fields = DT_Posts::get_post_field_settings( $post_type );
+
+            $conversations = $this_post['smm_conversation'];?>
+
+<div>
+                <ul class="smm-conversation-list">
+                    <?php foreach ( $conversations as $conversation ):
+                        $conversation_posts = DT_Posts::get_post( 'smm_conversation', $conversation['ID'] );
+                        foreach ( $conversation_posts['conversations'] as $key => $value ):?>
+                            <li>
+                                <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         <?php }
     }
 }
