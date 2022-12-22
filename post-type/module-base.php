@@ -432,7 +432,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                     'name' => 'Conversation 1',
                     'path' => 'https://www.facebook.com/1234567890/posts/1234567890',
                     'platform' => 'Facebook',
-                    'date' => '2020-01-01',
+                    'date' => '2022-12-02',
                     'status' => 'Open',
                     'participants' => [
                         [
@@ -440,7 +440,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                             'name' => 'Person 1',
                             'path' => 'https://www.facebook.com/1234567890',
                             'platform' => 'Facebook',
-                            'date' => '2020-01-01',
+                            'date' => '2022-12-02',
                             'status' => 'Open',
                         ],
                         [
@@ -448,7 +448,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                             'name' => 'Person 2',
                             'path' => 'https://www.facebook.com/1234567890',
                             'platform' => 'Facebook',
-                            'date' => '2020-01-01',
+                            'date' => '2022-12-02',
                             'status' => 'Open',
                         ],
                     ],
@@ -458,7 +458,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                     'name' => 'Conversation 2',
                     'path' => 'https://www.facebook.com/1234567890/posts/1234567890',
                     'platform' => 'Facebook',
-                    'date' => '2020-01-01',
+                    'date' => '2022-11-30',
                     'status' => 'Open',
                     'participants' => [
                         [
@@ -466,7 +466,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                             'name' => 'Person 1',
                             'path' => 'https://www.facebook.com/1234567890',
                             'platform' => 'Facebook',
-                            'date' => '2020-01-01',
+                            'date' => '2022-11-30',
                             'status' => 'Open',
                         ],
                         [
@@ -474,7 +474,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                             'name' => 'Person 2',
                             'path' => 'https://www.facebook.com/1234567890',
                             'platform' => 'Facebook',
-                            'date' => '2020-01-01',
+                            'date' => '2022-11-30',
                             'status' => 'Open',
                         ],
                     ],
@@ -491,7 +491,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 <ul class="smm-conversation-list">
                     <?php foreach ( $post['conversations'] as $key => $value ):?>
                         <li>
-                            <smm-list-item :conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
+                            <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
                         </li>
                     <?php endforeach; ?>
                 </ul>

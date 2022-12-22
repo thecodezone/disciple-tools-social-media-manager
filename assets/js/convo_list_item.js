@@ -5,7 +5,7 @@ import { DtBase } from "@disciple.tools/web-components";
 export class conversationList extends DtBase {
   static get properties() {
     return {
-      opened: { type: Boolean, reflect: true },
+      conversation: { type: Object }
     };
   }
 
@@ -59,7 +59,7 @@ export class conversationList extends DtBase {
         padding: .5em;
       }
 
-      .source {
+      .platform {
         font-size: .75em;
       }
       /* dt-button {
@@ -79,16 +79,23 @@ export class conversationList extends DtBase {
     `;
   }
 
+  _formatDate(date) {
+    let dateObj = new Date( date );
+    let dateString = new Intl.DateTimeFormat('default', { month: 'short', day: 'numeric' }).format(dateObj);
+
+    return dateString;
+  }
+
   render() {
     return html`<div class="line-container">
-      <div class="name">Iman Ghaznavian</div>
+      <div class="name">${this.conversation.name}</div>
       <div class="mid-line-container">
-        <div class="date"><span>Dec. 22</span></div>
-        <div class="source">Facebook</div>
+        <div class="date"><span>${this._formatDate( this.conversation.date )}</span></div>
+        <div class="platform">${this.conversation.platform}</div>
       </div>
       <dt-button type="" title="">
-          View Conversation
-        </dt-button>
+        View Conversation
+      </dt-button>
     </div>`;
   }
 
