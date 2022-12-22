@@ -12,8 +12,9 @@ export class conversationList extends DtBase {
   static get styles() {
     return css`
       :host {
-        --dt-button-context-background-color: var(--primary-color);
-        --dt-button-context-text-color: #FFFFFF;
+        --dt-modal-button-background: var(--primary-color);
+        --dt-modal-button-opener-background: var(--primary-color);
+        --dt-modal-button-color: #FFFFFF;
         --dt-button-font-weight: 100;
         --dt-button-padding-y: 0em;
         --dt-button-padding-y: 0.15em;
@@ -93,9 +94,13 @@ export class conversationList extends DtBase {
         <div class="date"><span>${this._formatDate( this.conversation.date )}</span></div>
         <div class="platform">${this.conversation.platform}</div>
       </div>
-      <dt-button type="" title="">
-        View Conversation
-      </dt-button>
+
+      <smm-conversation-modal title="" context="default" buttonclass="{&quot;alert&quot;:true}" buttonstyle="{&quot;padding&quot;:&quot;40px&quot;}">
+        <span slot="content">Test</span>
+        <span slot="openButton">
+          View Conversation
+        </span>
+    </smm-conversation-modal>
     </div>`;
   }
 
