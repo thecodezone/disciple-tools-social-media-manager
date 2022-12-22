@@ -29,7 +29,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ) {
         if ( $post_type === 'contacts' || $post_type === 'smm_conversation' ){
-            $tiles['disciple_tools_social_media_manager'] = [ 'label' => __( 'Social Media Management', 'disciple-tools-social-media-manager' ) ];
+            $tiles['disciple_tools_social_media_manager'] = [ 'label' => __( 'Conversation History', 'disciple-tools-social-media-manager' ) ];
         }
         return $tiles;
     }
@@ -43,7 +43,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
         /**
          * @todo set the post type
          */
-        if ( $post_type === 'contacts' || $post_type === 'smm_conversation' ){
+        //if ( $post_type === 'contacts' || $post_type === 'smm_conversation' ){
             /**
              * @todo Add the fields that you want to include in your tile.
              *
@@ -251,7 +251,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
             //     'tile' => 'a_beautiful_tile',
             //     'private'   => true
             // ];
-        }
+        // }
         return $fields;
     }
 
