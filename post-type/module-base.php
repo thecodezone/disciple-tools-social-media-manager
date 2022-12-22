@@ -181,7 +181,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 'name'        => __( 'Sources', 'disciple_tools' ),
                 'description' => _x( 'The website, event or location this contact came from.', 'Optional Documentation', 'disciple_tools' ),
                 'type'        => 'multi_select',
-                'default'     => ['Facebook'],
+                'default'     => [ 'Facebook' ],
                 'tile'     => 'details',
                 'customizable' => 'all',
                 'display' => 'typeahead',
@@ -405,9 +405,6 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
      * @link https://github.com/thecodezone/Documentation/blob/master/Theme-Core/field-and-tiles.md
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ){
-        if ( $post_type === $this->post_type ){
-
-        }
         return $tiles;
     }
 
