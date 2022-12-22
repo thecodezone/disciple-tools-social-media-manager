@@ -95,7 +95,7 @@ class Disciple_Tools_Social_Media_Manager {
          * @todo Decide if you want to create a new post type
          * To remove: delete the line below and remove the folder named /post-type
          */
-        //require_once( 'post-type/loader.php' ); // add starter post type extension to Disciple.Tools system
+        require_once( 'post-type/loader.php' ); // add starter post type extension to Disciple.Tools system
 
         require_once( 'tile/custom-tile.php' ); // add custom tile
         if ( 'settings' === dt_get_url_path() && ! $is_rest ) {

@@ -12,12 +12,12 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
      * @todo update these variables with your post_type, module key, and names.
      * @var string
      */
-    public $post_type = 'social_media_manager_post_type';
-    public $module = 'starter_base';
-    public $single_name = 'Starter';
-    public $plural_name = 'Starters';
+    public $post_type = 'smm_conversation';
+    public $module = 'smm_conversation';
+    public $single_name = 'Conversation';
+    public $plural_name = 'Conversations';
     public static function post_type(){
-        return 'social_media_manager_post_type';
+        return 'smm_conversation';
     }
 
     private static $_instance = null;
@@ -60,8 +60,8 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
     }
 
     public function after_setup_theme(){
-        $this->single_name = __( 'Starter', 'disciple-tools-social-media-manager' );
-        $this->plural_name = __( 'Starters', 'disciple-tools-social-media-manager' );
+        $this->single_name = __( 'Conversation', 'disciple-tools-social-media-manager' );
+        $this->plural_name = __( 'Conversations', 'disciple-tools-social-media-manager' );
 
         if ( class_exists( 'Disciple_Tools_Post_Type_Template' ) ) {
             new Disciple_Tools_Post_Type_Template( $this->post_type, $this->single_name, $this->plural_name );
@@ -76,8 +76,8 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
      */
     public function dt_get_post_type_settings( $settings, $post_type ){
         if ( $post_type === $this->post_type ){
-            $settings['label_singular'] = __( 'Starter', 'disciple-tools-social-media-manager' );
-            $settings['label_plural'] = __( 'Starters', 'disciple-tools-social-media-manager' );
+            $settings['label_singular'] = __( 'Conversation', 'disciple-tools-social-media-manager' );
+            $settings['label_plural'] = __( 'Conversations', 'disciple-tools-social-media-manager' );
         }
         return $settings;
     }
@@ -154,8 +154,8 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 'default_color' => '#366184',
                 'show_in_table' => 10,
             ];
-            $fields['assigned_to'] = [
-                'name'        => __( 'Assigned To', 'disciple-tools-social-media-manager' ),
+            $fields['claimed_by'] = [
+                'name'        => __( 'Claimed By', 'disciple-tools-social-media-manager' ),
                 'description' => __( 'Select the main person who is responsible for reporting on this record.', 'disciple-tools-social-media-manager' ),
                 'type'        => 'user_select',
                 'default'     => '',
@@ -164,49 +164,93 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 'show_in_table' => 16,
             ];
 
+            $fields['contacts'] = [
+                'name' => __( 'Contacts', 'disciple-tools-social-media-manager' ),
+                'description' => '',
+                'type' => 'connection',
+                'post_type' => 'contacts',
+                'p2p_direction' => 'to',
+                'p2p_key' => $this->post_type.'_to_contacts',
+                'tile' => 'status',
+                'icon' => get_template_directory_uri() . '/dt-assets/images/group-type.svg',
+                'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-contact.svg',
+                'show_in_table' => 35
+            ];
 
+            $fields['sources'] = [
+                'name'        => __( 'Sources', 'disciple_tools' ),
+                'description' => _x( 'The website, event or location this contact came from.', 'Optional Documentation', 'disciple_tools' ),
+                'type'        => 'multi_select',
+                'default'     => ['Facebook'],
+                'tile'     => 'details',
+                'customizable' => 'all',
+                'display' => 'typeahead',
+                'icon' => get_template_directory_uri() . '/dt-assets/images/arrow-collapse-all.svg?v=2',
+                'only_for_types' => [ 'access' ],
+                'in_create_form' => [ 'access' ]
+            ];
 
-            /**
-             * Common and recommended fields
-             */
+            $fields['campaigns'] = [
+                'name' => __( 'Campaigns', 'disciple_tools' ),
+                'description' => _x( 'Marketing campaigns or access activities that this contact interacted with.', 'Optional Documentation', 'disciple_tools' ),
+                'tile' => 'details',
+                'type'        => 'tags',
+                'default'     => [],
+                'icon' => get_template_directory_uri() . '/dt-assets/images/megaphone.svg?v=2',
+                'only_for_types' => [ 'access' ],
+            ];
+
             $fields['start_date'] = [
-                'name'        => __( 'Start Date', 'disciple-tools-social-media-manager' ),
+                'name'        => __( 'Conversation Start Date', 'disciple-tools-social-media-manager' ),
                 'description' => '',
                 'type'        => 'date',
                 'default'     => time(),
                 'tile' => 'details',
                 'icon' => get_template_directory_uri() . '/dt-assets/images/date-start.svg',
             ];
-            $fields['end_date'] = [
-                'name'        => __( 'End Date', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type'        => 'date',
-                'default'     => '',
-                'tile' => 'details',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/date-end.svg',
-            ];
-            $fields['multi_select'] = [
-                'name' => __( 'Multi-Select', 'disciple-tools-social-media-manager' ),
-                'description' => __( 'Multi Select Field', 'disciple-tools-social-media-manager' ),
-                'type' => 'multi_select',
-                'default' => [
-                    'item_1' => [
-                        'label' => __( 'Item 1', 'disciple-tools-social-media-manager' ),
-                        'description' => __( 'Item 1.', 'disciple-tools-social-media-manager' ),
-                    ],
-                    'item_2' => [
-                        'label' => __( 'Item 2', 'disciple-tools-social-media-manager' ),
-                        'description' => __( 'Item 2.', 'disciple-tools-social-media-manager' ),
-                    ],
-                    'item_3' => [
-                        'label' => __( 'Item 3', 'disciple-tools-social-media-manager' ),
-                        'description' => __( 'Item 3.', 'disciple-tools-social-media-manager' ),
-                    ],
-                ],
-                'tile' => 'details',
-                'in_create_form' => true,
-                'icon' => get_template_directory_uri() . '/dt-assets/images/languages.svg?v=2',
-            ];
+
+
+            /**
+             * Common and recommended fields
+             */
+            // $fields['start_date'] = [
+            //     'name'        => __( 'Start Date', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type'        => 'date',
+            //     'default'     => time(),
+            //     'tile' => 'details',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/date-start.svg',
+            // ];
+            // $fields['end_date'] = [
+            //     'name'        => __( 'End Date', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type'        => 'date',
+            //     'default'     => '',
+            //     'tile' => 'details',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/date-end.svg',
+            // ];
+            // $fields['multi_select'] = [
+            //     'name' => __( 'Multi-Select', 'disciple-tools-social-media-manager' ),
+            //     'description' => __( 'Multi Select Field', 'disciple-tools-social-media-manager' ),
+            //     'type' => 'multi_select',
+            //     'default' => [
+            //         'item_1' => [
+            //             'label' => __( 'Item 1', 'disciple-tools-social-media-manager' ),
+            //             'description' => __( 'Item 1.', 'disciple-tools-social-media-manager' ),
+            //         ],
+            //         'item_2' => [
+            //             'label' => __( 'Item 2', 'disciple-tools-social-media-manager' ),
+            //             'description' => __( 'Item 2.', 'disciple-tools-social-media-manager' ),
+            //         ],
+            //         'item_3' => [
+            //             'label' => __( 'Item 3', 'disciple-tools-social-media-manager' ),
+            //             'description' => __( 'Item 3.', 'disciple-tools-social-media-manager' ),
+            //         ],
+            //     ],
+            //     'tile' => 'details',
+            //     'in_create_form' => true,
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/languages.svg?v=2',
+            // ];
 
 
             /**
@@ -254,55 +298,55 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
              * @todo this adds generational support to this post type. remove if not needed.
              * generation and peer connection fields
              */
-            $fields['parents'] = [
-                'name' => __( 'Parents', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type' => 'connection',
-                'post_type' => $this->post_type,
-                'p2p_direction' => 'from',
-                'p2p_key' => $this->post_type.'_to_'.$this->post_type,
-                'tile' => 'connections',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/group-parent.svg',
-                'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
-            ];
-            $fields['peers'] = [
-                'name' => __( 'Peers', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type' => 'connection',
-                'post_type' => $this->post_type,
-                'p2p_direction' => 'any',
-                'p2p_key' => $this->post_type.'_to_peers',
-                'tile' => 'connections',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/group-peer.svg',
-                'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
-            ];
-            $fields['children'] = [
-                'name' => __( 'Children', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type' => 'connection',
-                'post_type' => $this->post_type,
-                'p2p_direction' => 'to',
-                'p2p_key' => $this->post_type.'_to_'.$this->post_type,
-                'tile' => 'connections',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/group-child.svg',
-                'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
-            ];
+            // $fields['parents'] = [
+            //     'name' => __( 'Parents', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type' => 'connection',
+            //     'post_type' => $this->post_type,
+            //     'p2p_direction' => 'from',
+            //     'p2p_key' => $this->post_type.'_to_'.$this->post_type,
+            //     'tile' => 'connections',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/group-parent.svg',
+            //     'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
+            // ];
+            // $fields['peers'] = [
+            //     'name' => __( 'Peers', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type' => 'connection',
+            //     'post_type' => $this->post_type,
+            //     'p2p_direction' => 'any',
+            //     'p2p_key' => $this->post_type.'_to_peers',
+            //     'tile' => 'connections',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/group-peer.svg',
+            //     'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
+            // ];
+            // $fields['children'] = [
+            //     'name' => __( 'Children', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type' => 'connection',
+            //     'post_type' => $this->post_type,
+            //     'p2p_direction' => 'to',
+            //     'p2p_key' => $this->post_type.'_to_'.$this->post_type,
+            //     'tile' => 'connections',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/group-child.svg',
+            //     'create-icon' => get_template_directory_uri() . '/dt-assets/images/add-group.svg',
+            // ];
             // end generations
 
             /**
              * @todo this adds people groups support to this post type. remove if not needed.
              * Connections to other post types
              */
-            $fields['peoplegroups'] = [
-                'name' => __( 'People Groups', 'disciple-tools-social-media-manager' ),
-                'description' => __( 'The people groups connected to this record.', 'disciple-tools-social-media-manager' ),
-                'type' => 'connection',
-                'tile' => 'details',
-                'post_type' => 'peoplegroups',
-                'p2p_direction' => 'to',
-                'p2p_key' => $this->post_type.'_to_peoplegroups',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/people-group.svg',
-            ];
+            // $fields['peoplegroups'] = [
+            //     'name' => __( 'People Groups', 'disciple-tools-social-media-manager' ),
+            //     'description' => __( 'The people groups connected to this record.', 'disciple-tools-social-media-manager' ),
+            //     'type' => 'connection',
+            //     'tile' => 'details',
+            //     'post_type' => 'peoplegroups',
+            //     'p2p_direction' => 'to',
+            //     'p2p_key' => $this->post_type.'_to_peoplegroups',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/people-group.svg',
+            // ];
 
             $fields['contacts'] = [
                 'name' => __( 'Contacts', 'disciple-tools-social-media-manager' ),
@@ -362,8 +406,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ){
         if ( $post_type === $this->post_type ){
-            $tiles['connections'] = [ 'label' => __( 'Connections', 'disciple-tools-social-media-manager' ) ];
-            $tiles['other'] = [ 'label' => __( 'Other', 'disciple-tools-social-media-manager' ) ];
+
         }
         return $tiles;
     }
@@ -375,15 +418,14 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
      */
     public function dt_details_additional_section( $section, $post_type ){
 
-        if ( $post_type === $this->post_type && $section === 'other' ) {
+        if ( $post_type === $this->post_type && $section === 'disciple_tools_social_media_manager' ) {
             $fields = DT_Posts::get_post_field_settings( $post_type );
             $post = DT_Posts::get_post( $this->post_type, get_the_ID() );
             ?>
             <div class="section-subheader">
-                <?php esc_html_e( 'Custom Section Contact', 'disciple-tools-social-media-manager' ) ?>
+                List of Conversations will go here
             </div>
             <div>
-                <p>Add information or custom fields here</p>
             </div>
 
         <?php }

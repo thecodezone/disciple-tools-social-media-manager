@@ -28,9 +28,8 @@ class Disciple_Tools_Social_Media_Manager_Tile
      * @return mixed
      */
     public function dt_details_additional_tiles( $tiles, $post_type = '' ) {
-        if ( $post_type === 'contacts' || $post_type === 'social_media_manager_post_type' ){
+        if ( $post_type === 'contacts' || $post_type === 'smm_conversation' ){
             $tiles['disciple_tools_social_media_manager'] = [ 'label' => __( 'Social Media Management', 'disciple-tools-social-media-manager' ) ];
-            $tiles['a_beautiful_tile'] = [ 'label' => __( 'A Beautiful Tile', 'disciple-tools-social-media-manager' ) ];
         }
         return $tiles;
     }
@@ -44,7 +43,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
         /**
          * @todo set the post type
          */
-        if ( $post_type === 'contacts' || $post_type === 'social_media_manager_post_type' ){
+        if ( $post_type === 'contacts' || $post_type === 'smm_conversation' ){
             /**
              * @todo Add the fields that you want to include in your tile.
              *
@@ -59,199 +58,199 @@ class Disciple_Tools_Social_Media_Manager_Tile
             /**
              * This is an example of a text field
              */
-            $fields['disciple_tools_social_media_manager_text'] = [
-                'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
-                'description' => _x( 'Text', 'Optional Documentation', 'disciple-tools-social-media-manager' ),
-                'type'        => 'text',
-                'default'     => '',
-                'tile' => 'disciple_tools_social_media_manager',
-                'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
-            ];
+            // $fields['disciple_tools_social_media_manager_text'] = [
+            //     'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
+            //     'description' => _x( 'Text', 'Optional Documentation', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'text',
+            //     'default'     => '',
+            //     'tile' => 'disciple_tools_social_media_manager',
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
+            // ];
             /**
              * This is an example of a multiselect field
              */
-            $fields['disciple_tools_social_media_manager_multiselect'] = [
-                'name' => __( 'Multiselect', 'disciple-tools-social-media-manager' ),
-                'default' => [
-                    'one' => [ 'label' => __( 'One', 'disciple-tools-social-media-manager' ) ],
-                    'two' => [ 'label' => __( 'Two', 'disciple-tools-social-media-manager' ) ],
-                    'three' => [ 'label' => __( 'Three', 'disciple-tools-social-media-manager' ) ],
-                    'four' => [ 'label' => __( 'Four', 'disciple-tools-social-media-manager' ) ],
-                ],
-                'tile' => 'disciple_tools_social_media_manager',
-                'type' => 'multi_select',
-                'hidden' => false,
-                'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
-            ];
+            // $fields['disciple_tools_social_media_manager_multiselect'] = [
+            //     'name' => __( 'Multiselect', 'disciple-tools-social-media-manager' ),
+            //     'default' => [
+            //         'one' => [ 'label' => __( 'One', 'disciple-tools-social-media-manager' ) ],
+            //         'two' => [ 'label' => __( 'Two', 'disciple-tools-social-media-manager' ) ],
+            //         'three' => [ 'label' => __( 'Three', 'disciple-tools-social-media-manager' ) ],
+            //         'four' => [ 'label' => __( 'Four', 'disciple-tools-social-media-manager' ) ],
+            //     ],
+            //     'tile' => 'disciple_tools_social_media_manager',
+            //     'type' => 'multi_select',
+            //     'hidden' => false,
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
+            // ];
             /**
              * This is an example of a key select field
              */
-            $fields['disciple_tools_social_media_manager_keyselect'] = [
-                'name' => 'Key Select',
-                'type' => 'key_select',
-                'tile' => 'disciple_tools_social_media_manager',
-                'default' => [
-                    'first'   => [
-                        'label' => _x( 'First', 'Key Select Label', 'disciple-tools-social-media-manager' ),
-                        'description' => _x( 'First Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
-                        'color' => '#ff9800'
-                    ],
-                    'second'   => [
-                        'label' => _x( 'Second', 'Key Select Label', 'disciple-tools-social-media-manager' ),
-                        'description' => _x( 'Second Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
-                        'color' => '#4CAF50'
-                    ],
-                    'third'   => [
-                        'label' => _x( 'Third', 'Key Select Label', 'disciple-tools-social-media-manager' ),
-                        'description' => _x( 'Third Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
-                        'color' => '#366184'
-                    ],
-                ],
-                'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
-                'default_color' => '#366184',
-                'select_cannot_be_empty' => true
-            ];
+            // $fields['disciple_tools_social_media_manager_keyselect'] = [
+            //     'name' => 'Key Select',
+            //     'type' => 'key_select',
+            //     'tile' => 'disciple_tools_social_media_manager',
+            //     'default' => [
+            //         'first'   => [
+            //             'label' => _x( 'First', 'Key Select Label', 'disciple-tools-social-media-manager' ),
+            //             'description' => _x( 'First Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
+            //             'color' => '#ff9800'
+            //         ],
+            //         'second'   => [
+            //             'label' => _x( 'Second', 'Key Select Label', 'disciple-tools-social-media-manager' ),
+            //             'description' => _x( 'Second Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
+            //             'color' => '#4CAF50'
+            //         ],
+            //         'third'   => [
+            //             'label' => _x( 'Third', 'Key Select Label', 'disciple-tools-social-media-manager' ),
+            //             'description' => _x( 'Third Key Description', 'Training Status field description', 'disciple-tools-social-media-manager' ),
+            //             'color' => '#366184'
+            //         ],
+            //     ],
+            //     'icon' => get_template_directory_uri() . '/dt-assets/images/edit.svg',
+            //     'default_color' => '#366184',
+            //     'select_cannot_be_empty' => true
+            // ];
 
             //test fields
-            $fields['number_test'] = [
-                'name'        => __( 'Number field', 'disciple-tools-social-media-manager' ),
-                'type'        => 'number',
-                'default'     => 0,
-                'tile'        => 'a_beautiful_tile',
-                'min_option'  => '5',
-            ];
-            $fields['number_test_private'] = [
-                'name'        => __( 'Number field private', 'disciple-tools-social-media-manager' ),
-                'type'        => 'number',
-                'default'     => 0,
-                'tile'        => 'a_beautiful_tile',
-                'private'     => true,
-                'max_option'  => '200',
-            ];
-            $fields['text_test'] = [
-                'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
-                'type'        => 'text',
-                'default'     => 0,
-                'tile'      => 'a_beautiful_tile',
-            ];
-            $fields['text_test_private'] = [
-                'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
-                'type'        => 'text',
-                'default'     => 0,
-                'tile'      => 'a_beautiful_tile',
-                'private'   => true
-            ];
-            $fields['contact_communication_channel_test'] = [
-                'name'        => __( 'Communication Channel', 'disciple-tools-social-media-manager' ),
-                'type'        => 'communication_channel',
-                'default'     => 0,
-                'tile'      => 'a_beautiful_tile',
-            ];
+            // $fields['number_test'] = [
+            //     'name'        => __( 'Number field', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'number',
+            //     'default'     => 0,
+            //     'tile'        => 'a_beautiful_tile',
+            //     'min_option'  => '5',
+            // ];
+            // $fields['number_test_private'] = [
+            //     'name'        => __( 'Number field private', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'number',
+            //     'default'     => 0,
+            //     'tile'        => 'a_beautiful_tile',
+            //     'private'     => true,
+            //     'max_option'  => '200',
+            // ];
+            // $fields['text_test'] = [
+            //     'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'text',
+            //     'default'     => 0,
+            //     'tile'      => 'a_beautiful_tile',
+            // ];
+            // $fields['text_test_private'] = [
+            //     'name'        => __( 'Text', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'text',
+            //     'default'     => 0,
+            //     'tile'      => 'a_beautiful_tile',
+            //     'private'   => true
+            // ];
+            // $fields['contact_communication_channel_test'] = [
+            //     'name'        => __( 'Communication Channel', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'communication_channel',
+            //     'default'     => 0,
+            //     'tile'      => 'a_beautiful_tile',
+            // ];
 
-            $fields['user_select_test'] = [
-                'name'        => __( 'User Select', 'disciple-tools-social-media-manager' ),
-                'type'        => 'user_select',
-                'tile'        => 'a_beautiful_tile'
-            ];
-            $fields['array_test'] = [
-                'name'        => __( 'Array', 'disciple-tools-social-media-manager' ),
-                'type'        => 'array',
-                'tile'        => 'a_beautiful_tile'
-            ];
-            $fields['location_test'] = [
-                'name' => 'location field',
-                'type' => 'location',
-                'tile' => 'a_beautiful_tile'
-            ];
-            $fields['date_test'] = [
-                'name'        => __( ' Date Field', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type'        => 'date',
-                'default'     => '',
-                'tile' => 'a_beautiful_tile'
-            ];
-            $fields['date_test_private'] = [
-                'name'        => __( ' Date Field', 'disciple-tools-social-media-manager' ),
-                'description' => '',
-                'type'        => 'date',
-                'default'     => '',
-                'tile' => 'a_beautiful_tile',
-                'private'   => true
-            ];
-            $fields['boolean_test'] = [
-                'name'        => __( 'Boolean', 'disciple-tools-social-media-manager' ),
-                'type'        => 'boolean',
-                'default'     => false,
-            ];
-            $fields['boolean_test_private'] = [
-                'name'        => __( 'Boolean', 'disciple-tools-social-media-manager' ),
-                'type'        => 'boolean',
-                'default'     => false,
-                'private'   => true
-            ];
-            $fields['multi_select_test'] = [
-                'name' => 'Random Options',
-                'type' => 'multi_select',
-                'default' => [
-                    'one' => [ 'label' => 'option 1' ],
-                    'two' => [ 'label' => 'option 2' ],
-                    'three' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-            ];
-            $fields['multi_select_test_private'] = [
-                'name' => 'Random Options',
-                'type' => 'multi_select',
-                'default' => [
-                    'one_private' => [ 'label' => 'option 1' ],
-                    'two_private' => [ 'label' => 'option 2' ],
-                    'three_private' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-                'private'   => true
-            ];
-            $fields['key_select_test'] = [
-                'name' => 'Random Options',
-                'type' => 'key_select',
-                'default' => [
-                    'one' => [ 'label' => 'option 1' ],
-                    'two' => [ 'label' => 'option 2' ],
-                    'three' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-            ];
-            $fields['key_select_test_private'] = [
-                'name' => 'Random Options',
-                'type' => 'key_select',
-                'default' => [
-                    'one_private' => [ 'label' => 'option 1' ],
-                    'two_private' => [ 'label' => 'option 2' ],
-                    'three_private' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-                'private'   => true
-            ];
-            $fields['tags_test'] = [
-                'name' => 'Random Tags',
-                'type' => 'tags',
-                'default' => [
-                    'one' => [ 'label' => 'option 1' ],
-                    'two' => [ 'label' => 'option 2' ],
-                    'three' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-            ];
-            $fields['tags_test_private'] = [
-                'name' => 'Random Tags Private',
-                'type' => 'tags',
-                'default' => [
-                    'one' => [ 'label' => 'option 1' ],
-                    'two' => [ 'label' => 'option 2' ],
-                    'three' => [ 'label' => 'option 3' ],
-                ],
-                'tile' => 'a_beautiful_tile',
-                'private'   => true
-            ];
+            // $fields['user_select_test'] = [
+            //     'name'        => __( 'User Select', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'user_select',
+            //     'tile'        => 'a_beautiful_tile'
+            // ];
+            // $fields['array_test'] = [
+            //     'name'        => __( 'Array', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'array',
+            //     'tile'        => 'a_beautiful_tile'
+            // ];
+            // $fields['location_test'] = [
+            //     'name' => 'location field',
+            //     'type' => 'location',
+            //     'tile' => 'a_beautiful_tile'
+            // ];
+            // $fields['date_test'] = [
+            //     'name'        => __( ' Date Field', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type'        => 'date',
+            //     'default'     => '',
+            //     'tile' => 'a_beautiful_tile'
+            // ];
+            // $fields['date_test_private'] = [
+            //     'name'        => __( ' Date Field', 'disciple-tools-social-media-manager' ),
+            //     'description' => '',
+            //     'type'        => 'date',
+            //     'default'     => '',
+            //     'tile' => 'a_beautiful_tile',
+            //     'private'   => true
+            // ];
+            // $fields['boolean_test'] = [
+            //     'name'        => __( 'Boolean', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'boolean',
+            //     'default'     => false,
+            // ];
+            // $fields['boolean_test_private'] = [
+            //     'name'        => __( 'Boolean', 'disciple-tools-social-media-manager' ),
+            //     'type'        => 'boolean',
+            //     'default'     => false,
+            //     'private'   => true
+            // ];
+            // $fields['multi_select_test'] = [
+            //     'name' => 'Random Options',
+            //     'type' => 'multi_select',
+            //     'default' => [
+            //         'one' => [ 'label' => 'option 1' ],
+            //         'two' => [ 'label' => 'option 2' ],
+            //         'three' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            // ];
+            // $fields['multi_select_test_private'] = [
+            //     'name' => 'Random Options',
+            //     'type' => 'multi_select',
+            //     'default' => [
+            //         'one_private' => [ 'label' => 'option 1' ],
+            //         'two_private' => [ 'label' => 'option 2' ],
+            //         'three_private' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            //     'private'   => true
+            // ];
+            // $fields['key_select_test'] = [
+            //     'name' => 'Random Options',
+            //     'type' => 'key_select',
+            //     'default' => [
+            //         'one' => [ 'label' => 'option 1' ],
+            //         'two' => [ 'label' => 'option 2' ],
+            //         'three' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            // ];
+            // $fields['key_select_test_private'] = [
+            //     'name' => 'Random Options',
+            //     'type' => 'key_select',
+            //     'default' => [
+            //         'one_private' => [ 'label' => 'option 1' ],
+            //         'two_private' => [ 'label' => 'option 2' ],
+            //         'three_private' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            //     'private'   => true
+            // ];
+            // $fields['tags_test'] = [
+            //     'name' => 'Random Tags',
+            //     'type' => 'tags',
+            //     'default' => [
+            //         'one' => [ 'label' => 'option 1' ],
+            //         'two' => [ 'label' => 'option 2' ],
+            //         'three' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            // ];
+            // $fields['tags_test_private'] = [
+            //     'name' => 'Random Tags Private',
+            //     'type' => 'tags',
+            //     'default' => [
+            //         'one' => [ 'label' => 'option 1' ],
+            //         'two' => [ 'label' => 'option 2' ],
+            //         'three' => [ 'label' => 'option 3' ],
+            //     ],
+            //     'tile' => 'a_beautiful_tile',
+            //     'private'   => true
+            // ];
         }
         return $fields;
     }
@@ -260,7 +259,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
         /**
          * @todo set the post type and the section key that you created in the dt_details_additional_tiles() function
          */
-        if ( ( $post_type === 'contacts' || $post_type === 'social_media_manager_post_type' ) && $section === 'disciple_tools_social_media_manager' ){
+        if ( ( $post_type === 'contacts' || $post_type === 'smm_conversation' ) && $section === 'disciple_tools_social_media_manager' ){
             /**
              * These are two sets of key data:
              * $this_post is the details for this specific post
@@ -278,8 +277,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
 
             <div class="cell small-12 medium-4">
                 <!-- @todo remove this notes section-->
-                <strong>You can do a number of customizations here.</strong><br><br>
-                See post types and field keys and values: <a href="<?php echo esc_html( admin_url( 'admin.php?page=dt_utilities&tab=fields' ) ); ?>" target="_blank">click here</a>
+
             </div>
 
         <?php }

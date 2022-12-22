@@ -18,13 +18,13 @@ add_filter( 'dt_post_type_modules', function( $modules ){
      * @todo Update the starter in the array below 'starter_base'. Follow the pattern.
      * @todo Add more modules by adding a new array element. i.e. 'starter_base_two'.
      */
-    $modules['starter_base'] = [
-        'name' => __( 'Starter', 'disciple-tools-social-media-manager' ),
+    $modules['smm_conversation'] = [
+        'name' => __( 'Conversation', 'disciple-tools-social-media-manager' ),
         'enabled' => true,
         'locked' => true,
         'prerequisites' => [ 'contacts_base' ],
-        'post_type' => 'social_media_manager_post_type',
-        'description' => __( 'Default starter functionality', 'disciple-tools-social-media-manager' )
+        'post_type' => 'smm_conversation',
+        'description' => __( 'Social Media Conversation', 'disciple-tools-social-media-manager' )
     ];
 
     return $modules;
