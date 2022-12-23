@@ -20,6 +20,14 @@ export class conversationModal extends DtModal {
     return css`
       :host {
       }
+      dialog {
+        width: 90vw;
+        height: 90vh;
+        padding: 0;
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.7);
+      }
       `
   }
 
@@ -31,7 +39,7 @@ export class conversationModal extends DtModal {
         @click=${this._dialogClick}
         @keypress=${this._dialogKeypress}
       >
-        TEST
+        <smm-chat-window></smm-chat-window>
     </dialog>
     <button
       class="button small opener"
