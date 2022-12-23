@@ -73,6 +73,8 @@ export class smmChatWindow extends DtBase {
 
       .conversation {
         flex: 10;
+        overflow: auto;
+        padding: 1em 0;
       }
       .chat-window__footer {
         flex: 1 2 0px;
@@ -126,7 +128,7 @@ export class smmChatWindow extends DtBase {
 
   render() {
     let fakeMessageIn = {
-      name: 'Name',
+      name: 'John Doe',
       avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
       date: '2021-01-01',
       body: 'This is a test message.',
@@ -161,6 +163,16 @@ export class smmChatWindow extends DtBase {
 
         </div>
         <div class="conversation">
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
           <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
           <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
         </div>
