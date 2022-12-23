@@ -125,11 +125,18 @@ export class smmChatWindow extends DtBase {
   }
 
   render() {
-    let fakeMessage = {
+    let fakeMessageIn = {
       name: 'Name',
       avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
       date: '2021-01-01',
       body: 'This is a test message.',
+    }
+
+    let fakeMessageOut = {
+      name: 'CodeZone',
+      avatar: 'https://dt.local/wp-content/plugins/disciple-tools-social-media-manager/assets/logo.svg',
+      date: '2021-01-01',
+      body: 'This is test reply.',
     }
 
     return html`
@@ -154,7 +161,8 @@ export class smmChatWindow extends DtBase {
 
         </div>
         <div class="conversation">
-          <smm-chat-message .message=${fakeMessage}></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageIn} incomingMessage></smm-chat-message>
+          <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
         </div>
         <div class="chat-window__footer">
           <textarea
