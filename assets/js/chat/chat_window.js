@@ -17,8 +17,60 @@ export class smmChatWindow extends DtBase {
       }
       .chat-window__header {
         flex: 1;
-        border-bottom: 1px solid #ccc;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 0em 1em;
+        border-bottom: 1px solid var(--border-color);
+        line-height: 1em;
+        padding: 1em 0.25em;
       }
+      .chat-window__header .avatar {
+        width: clamp(3em, 100%, 5em);
+        height: clamp(3em, 100%, 5em);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        grid-area: 1 / 1 / span 3 / auto;
+        justify-self: flex-start;
+        place-self: center;
+      }
+      .chat-window__header h1 {
+        margin: 0;
+        line-height: 1;
+        font-size: clamp(1.5em, 2vw, 2em);
+        color: var(--primary-color);
+        grid-row: 1;
+        grid-column: 2;
+      }
+
+      .chat-window__header .location {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .chat-window__header .age {
+        grid-column: 2;
+        grid-row: 3;
+      }
+
+      .chat-window__header .action-buttons.container {
+        grid-column: 3;
+        grid-row: span 3;
+        display: flex;
+        gap: 5px;
+        padding: 0.25em;
+        place-self: center;
+      }
+
+      .chat-window__header .action-buttons.container button {
+        width: 2.5em;
+        height: 2.5em;
+        padding: 0;
+      }
+
+      .chat-window__header .action-buttons.container button dt-icon {
+        font-size: clamp(1.5em, 2vw, 2em);
+      }
+
       .conversation {
         flex: 10;
       }
@@ -82,7 +134,25 @@ export class smmChatWindow extends DtBase {
 
     return html`
       <div class="chat-window">
-        <div class="chat-window__header">John Smith</div>
+        <div class="chat-window__header">
+          <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" height="250px" width="250px" alt="John Smith" class="avatar"/>
+          <h1 class="name">John Smith</h1>
+          <span class="location">Istanbul, Turkey</span>
+          <span class="age">25 years old</span>
+
+          <div class="action-buttons container">
+              <button>
+                <dt-icon class="delete_icon" icon="material-symbols:delete-outline"></dt-icon>
+              </button>
+              <button>
+                <dt-icon class="check_icon" icon="material-symbols:check-small"></dt-icon>
+              </button>
+              <button>
+                <dt-icon class="more_icon" icon="material-symbols:more-vert"></dt-icon>
+              </button>
+          </div>
+
+        </div>
         <div class="conversation">
           <smm-chat-message .message=${fakeMessage}></smm-chat-message>
         </div>
