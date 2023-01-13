@@ -163,6 +163,12 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 'icon' => get_template_directory_uri() . '/dt-assets/images/assigned-to.svg',
                 'show_in_table' => 16,
             ];
+            $fields['claimed'] = [
+                'name'        => __( 'Claimed', 'disciple_tools' ),
+                'type'        => 'boolean',
+                'default'     => false,
+                'tile' => 'status',
+            ];
 
             $fields['contacts'] = [
                 'name' => __( 'Contacts', 'disciple-tools-social-media-manager' ),
@@ -476,6 +482,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
             $post_fields = DT_Posts::get_post_field_settings( $post_type );
             if ( isset( $post_fields['status'] ) && !isset( $fields['status'] ) ){
                 $fields['status'] = 'active';
+                $fields['claimed'] = false;
             }
         }
         return $fields;
@@ -547,6 +554,26 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
         return $results;
     }
 
+    public static function count_unclaimed() {
+        global $wpdb;
+        $claimed_count = $wpdb->get_row( "SELECT COUNT(*) AS the_count FROM $wpdb->postmeta WHERE (meta_key = 'claimed' AND meta_value = '1')" );
+        $total_count = wp_count_posts( 'smm_conversation' );
+        if ( $total_count ) {
+            $total_count_published = $total_count->publish;
+        }
+
+        $unclaimed_count = $total_count_published - $claimed_count->the_count;
+
+        return $unclaimed_count;
+    }
+
+    public static function count_claimed() {
+        global $wpdb;
+        $count = $wpdb->get_row( "SELECT COUNT(*) AS the_count FROM $wpdb->postmeta WHERE (meta_key = 'claimed' AND meta_value = '')" );
+
+        return $count->the_count;
+    }
+
     //build list page filters
     public static function dt_user_list_filters( $filters, $post_type ){
         /**
@@ -572,7 +599,6 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                     dt_increment( $active_counts[$count['status']], $count['count'] );
                 }
             }
-
             $filters['tabs'][] = [
                 'key' => 'assigned_to_me',
                 'label' => __( 'Assigned to me', 'disciple-tools-social-media-manager' ),
@@ -622,6 +648,25 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 }
             }
 
+            $filters['filters'][] = [
+                'ID' => 'claimed_conversations',
+                'tab' => 'all',
+                'name' => __( 'Claimed Conversations', 'disciple-tools-social-media-manager' ),
+                'query' => [
+                    'claimed' => [ true ],
+                ],
+                'count' => self::count_claimed()
+            ];
+
+            $filters['filters'][] = [
+                'ID' => 'unclaimed_conversations',
+                'tab' => 'all',
+                'name' => __( 'Unclaimed Conversations', 'disciple-tools-social-media-manager' ),
+                'query' => [
+                    'claimed' => [ false ],
+                ],
+                'count' => self::count_unclaimed()
+            ];
             if ( current_user_can( 'view_any_' . self::post_type() ) ){
                 $counts = self::get_all_status_types();
                 $active_counts = [];
@@ -654,7 +699,6 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                     ],
                     'count' => $total_all
                 ];
-
                 foreach ( $fields['status']['default'] as $status_key => $status_value ) {
                     if ( isset( $status_counts[$status_key] ) ){
                         $filters['filters'][] = [
@@ -701,6 +745,7 @@ class Disciple_Tools_Social_Media_Manager_Base extends DT_Module_Base {
                 }
             }
         }
+
         return $filters;
     }
 
