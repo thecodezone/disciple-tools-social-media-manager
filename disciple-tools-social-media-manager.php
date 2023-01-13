@@ -102,6 +102,9 @@ class Disciple_Tools_Social_Media_Manager {
             require_once( 'tile/settings-tile.php' ); // add custom settings page tile
         }
 
+        if ( 'dashboard' === dt_get_url_path() && ! $is_rest ) {
+            require_once( 'tile/dashboard-tile.php' ); // add custom dashboard tile
+        }
         /**
          * @todo Decide if you want to create a magic link
          * To remove: delete the line below and remove the folder named /magic-link

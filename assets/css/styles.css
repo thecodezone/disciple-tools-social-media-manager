@@ -34,3 +34,8 @@ body {
     margin: 0;
     border: 1px solid #E6E6E6;
 }
+
+.dashboard-tile-smm-list-container {
+    flex: 2;
+    overflow-y: scroll;
+}
