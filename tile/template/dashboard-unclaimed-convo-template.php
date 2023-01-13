@@ -6,9 +6,9 @@
     if ( is_wp_error( $conversations ) ) {
         $conversations = [];
     }
-?>
+    ?>
 <div class="tile-header">
-    <?php  echo esc_html( $this->label ); ?>
+    <?php echo esc_html( $this->label ); ?>
 </div>
 <div class="dashboard-tile-smm-list-container">
     <ul class="smm-conversation-list">

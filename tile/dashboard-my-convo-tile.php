@@ -28,8 +28,8 @@ class SMM_My_Conversation_Tile extends DT_Dashboard_Tile
 DT_Dashboard_Plugin_Tiles::instance()->register(
     new SMM_My_Conversation_Tile(
         'SMM_My_Convo_Tile',                     //handle
-        __('My Conversations', 'disciple-tools-social-media-manager'), //label
-         [
+        __( 'My Conversations', 'disciple-tools-social-media-manager' ), //label
+        [
             'priority' => 1,
             'span' => 2
          ]

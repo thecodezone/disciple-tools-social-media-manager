@@ -28,8 +28,8 @@ class SMM_Unclaimed_Conversation_Tile extends DT_Dashboard_Tile
 DT_Dashboard_Plugin_Tiles::instance()->register(
     new SMM_Unclaimed_Conversation_Tile(
         'SMM_Unclaimed_Convo_Tile',                     //handle
-        __('Unclaimed Conversations', 'disciple-tools-social-media-manager'), //label
-         [
+        __( 'Unclaimed Conversations', 'disciple-tools-social-media-manager' ), //label
+        [
             'priority' => 1,
             'span' => 2
          ]
