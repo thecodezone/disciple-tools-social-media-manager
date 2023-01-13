@@ -103,7 +103,9 @@ class Disciple_Tools_Social_Media_Manager {
         }
 
         if ( 'dashboard' === dt_get_url_path() && ! $is_rest ) {
-            require_once( 'tile/dashboard-tile.php' ); // add custom dashboard tile
+            require_once( 'tile/dashboard-my-convo-tile.php' ); // add custom dashboard tile
+            require_once( 'tile/dashboard-unclaimed-convo-tile.php' ); // add custom dashboard tile
+
         }
         /**
          * @todo Decide if you want to create a magic link

@@ -2,7 +2,7 @@
 /**
 * Dashboard Social Media Conversation Tile
 */
-class SMM_Conversation_Tile extends DT_Dashboard_Tile
+class SMM_My_Conversation_Tile extends DT_Dashboard_Tile
 {
 
     /**
@@ -18,7 +18,7 @@ class SMM_Conversation_Tile extends DT_Dashboard_Tile
      * Render the tile
      */
     public function render() {
-        include( trailingslashit( plugin_dir_path( __DIR__ ) ) . 'tile/template/dashboard-template.php' );
+        include( trailingslashit( plugin_dir_path( __DIR__ ) ) . 'tile/template/dashboard-my-convo-template.php' );
     }
 }
 
@@ -26,12 +26,13 @@ class SMM_Conversation_Tile extends DT_Dashboard_Tile
 * Next, register our class. This can be done in the after_setup_theme hook.
 */
 DT_Dashboard_Plugin_Tiles::instance()->register(
-    new SMM_Conversation_Tile(
-        'SMM_Convo_Tile',                     //handle
-        __('Social Media Manager Conversations', 'disciple-tools-social-media-manager'), //label
+    new SMM_My_Conversation_Tile(
+        'SMM_My_Convo_Tile',                     //handle
+        __('My Conversations', 'disciple-tools-social-media-manager'), //label
          [
             'priority' => 1,
             'span' => 2
          ]
-    ));
+    )
+);
 ?>
