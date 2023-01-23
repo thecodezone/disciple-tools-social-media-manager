@@ -56,7 +56,6 @@ export class conversationList extends LitElement {
 
   _paginationRender () {
     const pages = Math.ceil(this.conversations.length/this.perPage);
-console.log((pages-1) * this.perPage);
     if (pages > 1){
       if (this.offset === 0) {
         return html`
@@ -97,7 +96,6 @@ console.log((pages-1) * this.perPage);
   }
 
   render() {
-    console.log(this.offset);
     return html`
       <ul class="smm-conversation-list">
       ${repeat(
