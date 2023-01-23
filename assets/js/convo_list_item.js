@@ -2,10 +2,10 @@ import { css, html, LitElement } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { DtBase } from "@disciple.tools/web-components";
 
-export class conversationList extends DtBase {
+export class conversationListItem extends DtBase {
   static get properties() {
     return {
-      conversation: { type: Object }
+      conversation: { type: Array }
     };
   }
 
@@ -91,7 +91,7 @@ export class conversationList extends DtBase {
     return html`<div class="line-container">
       <div class="name">${this.conversation.name}</div>
       <div class="mid-line-container">
-        <div class="date"><span>${this._formatDate( this.conversation.date )}</span></div>
+        <div class="date"><span>${this._formatDate( this.conversation.post_date.formatted )}</span></div>
         <div class="platform">${this.conversation.platform}</div>
       </div>
 
@@ -106,4 +106,4 @@ export class conversationList extends DtBase {
 
 }
 
-window.customElements.define("smm-list-item", conversationList);
+customElements.define("smm-list-item", conversationListItem);
