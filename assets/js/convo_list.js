@@ -33,6 +33,7 @@ export class conversationList extends LitElement {
         cursor: pointer;
         color: var(--gray-1, #B7B7B7);
         font-size: 1em;
+        padding: .25em 0.5em;
       }
 
       button svg {
@@ -42,8 +43,8 @@ export class conversationList extends LitElement {
       }
 
       button.active {
-        background: var(--primary-color, #0073aa);
-        color: var(--primary-color-inverted, #fff);
+        background: var(--surface-0, e2e2e2);
+        color: var(--text-color, #0a0a0a);
         border-radius: 5px;
       }
       .smm-list-pagination {
