@@ -259,101 +259,32 @@ class Disciple_Tools_Social_Media_Manager_Tile
         /**
          * @todo set the post type and the section key that you created in the dt_details_additional_tiles() function
          */
-        if ( ( $post_type === 'smm_conversation' ) && $section === 'disciple_tools_social_media_manager' ){
-            /**
-             * These are two sets of key data:
-             * $this_post is the details for this specific post
-             * $post_type_fields is the list of the default fields for the post type
-             *
-             * You can pull any query data into this section and display it.
-             */
-            $this_post = DT_Posts::get_post( $post_type, get_the_ID() );
-            $post_type_fields = DT_Posts::get_post_field_settings( $post_type );
-            ?>
+        if ( ( $post_type === 'smm_conversation' ) && $section === 'disciple_tools_social_media_manager' ){            ?>
 
             <!--
             @todo you can add HTML content to this section.
             -->
 
             <?php
-            $fields = DT_Posts::get_post_field_settings( 'smm_conversation' );
-//this is to fake random names for testing
-            function randomName() {
-                $firstname = array( 'Johnathon','Anthony','Erasmo','Raleigh','Nancie','Tama','Camellia','Augustine','Christeen','Luz','Diego','Lyndia','Thomas','Georgianna','Leigha','Alejandro','Marquis','Joan','Stephania','Elroy','Zonia','Buffy','Sharie','Blythe','Gaylene','Elida','Randy','Margarete','Margarett','Dion','Tomi','Arden','Clora','Laine','Becki','Margherita','Bong','Jeanice','Qiana','Lawanda','Rebecka','Maribel','Tami','Yuri','Michele','Rubi','Larisa','Lloyd','Tyisha','Samatha' );
-
-                $lastname = array( 'Mischke','Serna','Pingree','Mcnaught','Pepper','Schildgen','Mongold','Wrona','Geddes','Lanz','Fetzer','Schroeder','Block','Mayoral','Fleishman','Roberie','Latson','Lupo','Motsinger','Drews','Coby','Redner','Culton','Howe','Stoval','Michaud','Mote','Menjivar','Wiers','Paris','Grisby','Noren','Damron','Kazmierczak','Haslett','Guillemette','Buresh','Center','Kucera','Catt','Badon','Grumbles','Antes','Byron','Volkman','Klemp','Pekar','Pecora','Schewe','Ramage' );
-
-                $name = $firstname[ rand( 0, count( $firstname ) -1 ) ];
-                $name .= ' ';
-                $name .= $lastname[ rand( 0, count( $lastname ) -1 ) ];
-
-                return $name;
-            }
-
-            $fake_conversation_data = [
-                [
-                    'id' => get_the_ID(),
-                    'name' => randomName(),
-                    'path' => 'https://www.facebook.com/1234567890/posts/1234567890',
-                    'platform' => 'Facebook',
-                    'date' => '2022-12-02',
-                    'status' => 'Open',
-                    'participants' => [
-                        [
-                            'id' => 1,
-                            'name' => 'Person 1',
-                            'path' => 'https://www.facebook.com/1234567890',
-                            'platform' => 'Facebook',
-                            'date' => '2022-12-02',
-                            'status' => 'Open',
-                        ],
-                        [
-                            'id' => 2,
-                            'name' => 'Person 2',
-                            'path' => 'https://www.facebook.com/1234567890',
-                            'platform' => 'Facebook',
-                            'date' => '2022-12-02',
-                            'status' => 'Open',
-                        ],
-                    ],
-                ],
-            ];
-
-            //This is adding the fake_conversation Data into the post
-            //@todo remove this when you have real data
-            $fields = DT_Posts::update_post( 'smm_conversation', get_the_ID(), [ 'conversations' => $fake_conversation_data ], true, false );
-
-            $conversation_post = DT_Posts::get_post( 'smm_conversation', get_the_ID() );
+            $this_post[] = DT_Posts::get_post( $post_type, get_the_ID() );
             ?>
 
-            <div>
-                <ul class="smm-conversation-list">
-                    <?php foreach ( $conversation_post['conversations'] as $key => $value ):?>
-                        <li>
-                            <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-list-item>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+            <div class="smm-conversation-list">
+                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $this_post ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-conversation-list>
             </div>
 
         <?php }
         if ( ( $post_type === 'contacts' ) && $section === 'disciple_tools_social_media_manager' ){
             $this_post = DT_Posts::get_post( $post_type, get_the_ID() );
-            $post_type_fields = DT_Posts::get_post_field_settings( $post_type );
 
-            $conversations = $this_post['smm_conversation'];?>
+            $conversation_list = [];
+            foreach ( $this_post['smm_conversation'] as $conversation ) {
+                $conversation_list[] = DT_Posts::get_post( 'smm_conversation', $conversation['ID'] );
+            }
+            ?>
 
-<div>
-                <ul class="smm-conversation-list">
-                    <?php foreach ( $conversations as $conversation ):
-                        $conversation_posts = DT_Posts::get_post( 'smm_conversation', $conversation['ID'] );
-                        foreach ( $conversation_posts['conversations'] as $key => $value ):?>
-                            <li>
-                                <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-list-item>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php endforeach; ?>
-                </ul>
+            <div class="smm-conversation-list">
+                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $conversation_list ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-conversation-list>
             </div>
         <?php }
     }

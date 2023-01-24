@@ -14,10 +14,8 @@ export class conversationListItem extends DtBase {
   }
   constructor() {
     super();
-    this.claimed = false; //TODO: get this from the conversation object
   }
-
-  static get styles() {
+static get styles() {
     return css`
       :host {
         --dt-modal-button-background: var(--primary-color);
@@ -85,11 +83,19 @@ export class conversationListItem extends DtBase {
           width: 100%;
           justify-content: space-evenly;
         }
+      }
     `;
+}
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.claimed = this.conversation.claimed;
   }
 
-  _formatDate(date) {
-    let dateObj = new Date( date );
+
+
+  _formatDate() {
+    let dateObj = new Date( this.conversation.post_date.formatted );
     let dateString = new Intl.DateTimeFormat('default', { month: 'short', day: 'numeric' }).format(dateObj);
 
     return dateString;
@@ -99,7 +105,7 @@ export class conversationListItem extends DtBase {
     return html`<div class="line-container">
       <div class="name">${this.conversation.name}</div>
       <div class="mid-line-container">
-        <div class="date"><span>${this._formatDate( this.conversation.post_date.formatted )}</span></div>
+        <div class="date"><span>${this._formatDate()}</span></div>
         <div class="platform">${this.conversation.platform}</div>
       </div>
 
