@@ -1,15 +1,20 @@
 import { css, html, LitElement } from "lit";
 import {repeat} from 'lit/directives/repeat.js';
 import {classMap} from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { msg } from '@lit/localize';
+import { DtBase } from "@disciple.tools/web-components";
 
 
-export class conversationList extends LitElement {
+
+export class conversationList extends DtBase {
   static get properties() {
     return {
+      ...super.properties,
       conversations: { type: Array },
       offset: { type: Number},
       perPage: { type: Number},
+      userid: { type: Number},
     };
   }
 
@@ -103,7 +108,7 @@ export class conversationList extends LitElement {
           this.conversations,
           (conversation) => conversation.ID,
           (conversation, index) => (this.offset <= index && index < (this.offset + this.perPage) ) ? html`
-        <li><smm-list-item .conversation=${conversation}></smm-list-item></li>
+        <li><smm-list-item .conversation=${conversation} userid=${this.userid}></smm-list-item></li>
         ` : ``
         )}
       </ul>

@@ -330,7 +330,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
                 <ul class="smm-conversation-list">
                     <?php foreach ( $conversation_post['conversations'] as $key => $value ):?>
                         <li>
-                            <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
+                            <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-list-item>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -349,7 +349,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
                         $conversation_posts = DT_Posts::get_post( 'smm_conversation', $conversation['ID'] );
                         foreach ( $conversation_posts['conversations'] as $key => $value ):?>
                             <li>
-                                <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>"></smm-list-item>
+                                <smm-list-item conversation="<?php echo esc_attr( wp_json_encode( $value ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-list-item>
                             </li>
                         <?php endforeach; ?>
                     <?php endforeach; ?>

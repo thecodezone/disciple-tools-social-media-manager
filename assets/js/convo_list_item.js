@@ -1,12 +1,20 @@
 import { css, html, LitElement } from "lit";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { DtBase } from "@disciple.tools/web-components";
 
 export class conversationListItem extends DtBase {
   static get properties() {
     return {
-      conversation: { type: Array }
+      ...super.properties,
+      conversation: { type: Array },
+      claimed: { type: Boolean },
+      userid: { type: Number },
     };
+  }
+  constructor() {
+    super();
+    this.claimed = false; //TODO: get this from the conversation object
   }
 
   static get styles() {
@@ -95,7 +103,7 @@ export class conversationListItem extends DtBase {
         <div class="platform">${this.conversation.platform}</div>
       </div>
 
-      <smm-conversation-modal title="" context="default" buttonclass="{&quot;alert&quot;:true}" buttonstyle="{&quot;padding&quot;:&quot;40px&quot;}">
+      <smm-conversation-modal title="" context="default" ?claimed=${this.claimed} convoid="${this.conversation.ID}" userid=${this.userid} buttonclass="{&quot;alert&quot;:true}" buttonstyle="{&quot;padding&quot;:&quot;40px&quot;}">
         <span slot="content">Test</span>
         <span slot="openButton">
           View Conversation

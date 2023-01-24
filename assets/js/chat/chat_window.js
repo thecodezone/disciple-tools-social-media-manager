@@ -113,9 +113,21 @@ export class smmChatWindow extends DtBase {
 
   static get properties() {
     return {
+      ...super.properties,
       message: { type: Object },
       open: { type: Boolean },
+      claimed: { type: Boolean },
+      convoid: { type: Number },
+      userid: { type: Number },
     };
+  }
+
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
   }
 
   ChatButtonClick(e) {
@@ -124,6 +136,45 @@ export class smmChatWindow extends DtBase {
     console.log(messageText);
 
     this.shadowRoot.querySelector('textarea').value = '';
+  }
+
+  claimConvo() {
+    console.log('Claiming Conversation');
+    const payload = {
+      claimed: true,
+      claimed_by: this.userid,
+    };
+
+    API.update_post('smm_conversation', this.convoid, payload).then((response) => {
+      console.log(response);
+      this.claimed = true;
+    });
+  }
+
+  fetchSettings() {
+    return fetch("/wp-json/dt/v1/users/my").then((response) => {
+      console.log(response)
+      return response.json()
+    }
+    );
+  }
+
+  _chatWindowFooterRender() {
+    if (this.claimed) {
+        return html`<textarea
+          id="smm-chat-input"
+          name="smm-chat-input"
+          aria-label="Chat Response Input"
+          type="text"
+          ?disabled=${this.disabled}
+          class="text-input"
+          @change=${this.onChange}
+          .value="${this.value || ''}"
+        ></textarea>
+        <button class="send-button" @click=${this.ChatButtonClick}>Send</button>`
+    } else {
+        return html`<button @click=${this.claimConvo}>Claim this Conversation</button>`
+    }
   }
 
   render() {
@@ -177,17 +228,7 @@ export class smmChatWindow extends DtBase {
           <smm-chat-message .message=${fakeMessageOut}></smm-chat-message>
         </div>
         <div class="chat-window__footer">
-          <textarea
-          id="smm-chat-input"
-          name="smm-chat-input"
-          aria-label="Chat Response Input"
-          type="text"
-          ?disabled=${this.disabled}
-          class="text-input"
-          @change=${this.onChange}
-          .value="${this.value || ''}"
-        ></textarea>
-          <button class="send-button" @click=${this.ChatButtonClick}>Send</button>
+          ${this._chatWindowFooterRender()}
         </div>
       </div>
     `;

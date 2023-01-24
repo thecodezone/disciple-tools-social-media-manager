@@ -9,11 +9,10 @@ export class conversationModal extends DtModal {
     return {
       conversation: { type: Object },
       open: { type: Boolean },
+      claimed: { type: Boolean },
+      convoid: { type: Number },
+      userid: { type: Number },
     };
-  }
-
-  constructor() {
-    super();
   }
 
   static get styles() {
@@ -39,7 +38,7 @@ export class conversationModal extends DtModal {
         @click=${this._dialogClick}
         @keypress=${this._dialogKeypress}
       >
-        <smm-chat-window></smm-chat-window>
+        <smm-chat-window ?claimed=${this.claimed} convoid=${this.convoid} userid=${this.userid}></smm-chat-window>
     </dialog>
     <button
       class="button small opener"
