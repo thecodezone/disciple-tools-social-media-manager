@@ -109,7 +109,7 @@ static get styles() {
         <div class="platform">${this.conversation.platform}</div>
       </div>
 
-      <smm-conversation-modal title="" context="default" ?claimed=${this.claimed} convoid="${this.conversation.ID}" userid=${this.userid} buttonclass="{&quot;alert&quot;:true}" buttonstyle="{&quot;padding&quot;:&quot;40px&quot;}">
+      <smm-conversation-modal title="" context="default" ?claimed=${this.claimed} convoid="${this.conversation.ID}" userid=${this.userid} conversation="${JSON.stringify( this.conversation )}" buttonclass="{&quot;alert&quot;:true}" buttonstyle="{&quot;padding&quot;:&quot;40px&quot;}">
         <span slot="content">Test</span>
         <span slot="openButton">
           View Conversation

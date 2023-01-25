@@ -119,6 +119,7 @@ export class smmChatWindow extends DtBase {
       claimed: { type: Boolean },
       convoid: { type: Number },
       userid: { type: Number },
+      conversation: { type: Object },
     };
   }
 
@@ -139,7 +140,6 @@ export class smmChatWindow extends DtBase {
   }
 
   claimConvo() {
-    console.log('Claiming Conversation');
     const payload = {
       claimed: true,
       claimed_by: this.userid,
@@ -161,17 +161,23 @@ export class smmChatWindow extends DtBase {
 
   _chatWindowFooterRender() {
     if (this.claimed) {
-        return html`<textarea
-          id="smm-chat-input"
-          name="smm-chat-input"
-          aria-label="Chat Response Input"
-          type="text"
-          ?disabled=${this.disabled}
-          class="text-input"
-          @change=${this.onChange}
-          .value="${this.value || ''}"
-        ></textarea>
-        <button class="send-button" @click=${this.ChatButtonClick}>Send</button>`
+        if (this.userid != this.conversation.claimed_by.id) {
+          return html`
+            <span>This Conversation is claimed by another user</span>
+            <button @click=${this.claimConvo}>Claim this Conversation</button>`
+        } else {
+          return html`<textarea
+            id="smm-chat-input"
+            name="smm-chat-input"
+            aria-label="Chat Response Input"
+            type="text"
+            ?disabled=${this.disabled}
+            class="text-input"
+            @change=${this.onChange}
+            .value="${this.value || ''}"
+          ></textarea>
+          <button class="send-button" @click=${this.ChatButtonClick}>Send</button>`
+        }
     } else {
         return html`<button @click=${this.claimConvo}>Claim this Conversation</button>`
     }

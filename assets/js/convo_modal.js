@@ -38,7 +38,7 @@ export class conversationModal extends DtModal {
         @click=${this._dialogClick}
         @keypress=${this._dialogKeypress}
       >
-        <smm-chat-window ?claimed=${this.claimed} convoid=${this.convoid} userid=${this.userid}></smm-chat-window>
+        <smm-chat-window ?claimed=${this.claimed} convoid=${this.convoid} userid=${this.userid} conversation=${JSON.stringify(this.conversation)}></smm-chat-window>
     </dialog>
     <button
       class="button small opener"
