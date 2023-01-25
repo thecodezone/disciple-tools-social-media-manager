@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { msg } from '@lit/localize';
-import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { DtBase } from "@disciple.tools/web-components";
 
 
@@ -59,6 +59,33 @@ export class smmChatWindow extends DtBase {
         gap: 5px;
         padding: 0.25em;
         place-self: center;
+      }
+
+      #moreActions {
+        display: none;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        transform: translate(0, 2.5em);
+        width: 7.5em;
+        position: absolute;
+        background: var(--gray-1);
+      }
+
+      #moreAction.open {
+        display: grid;
+      }
+
+      #moreActions li {
+        display: block;
+        width: 100%;
+        height: 3em;
+      }
+
+      #moreActions li button {
+        width: 100%;
+        height: 100%;
+        display: block;
       }
 
       .chat-window__header .action-buttons.container button {
@@ -120,6 +147,7 @@ export class smmChatWindow extends DtBase {
       convoid: { type: Number },
       userid: { type: Number },
       conversation: { type: Object },
+      moreActionOpen: { type: Boolean },
     };
   }
 
@@ -146,17 +174,28 @@ export class smmChatWindow extends DtBase {
     };
 
     API.update_post('smm_conversation', this.convoid, payload).then((response) => {
-      console.log(response);
+      this.conversation = response;
       this.claimed = true;
     });
   }
 
-  fetchSettings() {
-    return fetch("/wp-json/dt/v1/users/my").then((response) => {
-      console.log(response)
-      return response.json()
+  unclaimConvo() {
+    const payload = {
+      claimed: false,
+      claimed_by: 0,
+    };
+    API.update_post('smm_conversation', this.convoid, payload).then((response) => {
+      this.conversation = response;
+      this.claimed = false;
+    });
+  }
+
+  _moreActions() {
+    if (this.moreActionOpen) {
+      this.moreActionOpen = false;
+    } else {
+      this.moreActionOpen = true;
     }
-    );
   }
 
   _chatWindowFooterRender() {
@@ -198,6 +237,10 @@ export class smmChatWindow extends DtBase {
       body: 'This is test reply.',
     }
 
+    const moreActionsStyles = {
+      display: this.moreActionOpen ? 'grid' : 'none',
+    };
+
     return html`
       <div class="chat-window">
         <div class="chat-window__header">
@@ -214,8 +257,12 @@ export class smmChatWindow extends DtBase {
                 <dt-icon class="check_icon" icon="material-symbols:check-small"></dt-icon>
               </button>
               <button>
-                <dt-icon class="more_icon" icon="material-symbols:more-vert"></dt-icon>
+                <dt-icon class="more_icon" icon="material-symbols:more-vert" @click=${this._moreActions}></dt-icon>
               </button>
+              <ul id="moreActions"  style=${styleMap( moreActionsStyles )}>
+                <li><button @click=${this.unclaimConvo}>Release This Conversation</button></li>
+                <li><button @click=${this.claimConvo}>Claim This Conversation for yourself</button></li>
+              </ul>
           </div>
 
         </div>
