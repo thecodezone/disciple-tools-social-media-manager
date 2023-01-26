@@ -45,8 +45,7 @@ export class smmSearch extends DtText {
   }
 
   search(e) {
-    console.log(input.value);
-
+    const input = e.target;
     if (input.value === this.value) {
       return;
     } else {

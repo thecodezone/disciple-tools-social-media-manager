@@ -270,7 +270,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
             ?>
 
             <div class="smm-conversation-list">
-                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $this_post ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-conversation-list>
+                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $this_post ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?> showOnlyCurrentConversation></smm-conversation-list>
             </div>
 
         <?php }
@@ -284,7 +284,7 @@ class Disciple_Tools_Social_Media_Manager_Tile
             ?>
 
             <div class="smm-conversation-list">
-                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $conversation_list ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?>></smm-conversation-list>
+                <smm-conversation-list conversations="<?php echo esc_attr( wp_json_encode( $conversation_list ) ) ?>" userid=<?php echo esc_attr( get_current_user_id() ) ?> showOnlyContactConversations=<?php echo esc_attr( get_the_ID() );?>></smm-conversation-list>
             </div>
         <?php }
     }

@@ -17,6 +17,10 @@ export class conversationList extends DtBase {
       perPage: { type: Number},
       userid: { type: Number},
       showOnlyUnclaimed: { type: Boolean},
+      showOnlyClaimed: { type: Boolean},
+      showOnlyMyConversations: { type: Boolean},
+      showOnlyContactConversations: { type: Number},
+      showOnlyCurrentConversation: {type: Boolean}
     };
   }
 
@@ -76,8 +80,35 @@ export class conversationList extends DtBase {
     if (e.target !== this) {
       return;
     }
-    e.target === e.currentTarget ? 'container' : e.target.textContent;
-    let query = {"text":e.detail.value,"sort":"last_modified", "claimed": [this.showOnlyUnclaimed ? false : true]}
+
+
+    let query = {"sort":"last_modified"}
+
+    if (e.detail.value !== "") {
+      query["text"] = e.detail.value;
+    }
+
+    if ( this.showOnlyUnclaimed && !this.showOnlyClaimed ) {
+      query["claimed"] = [false]
+    }
+
+    if ( this.showOnlyClaimed && !this.showOnlyUnclaimed) {
+      query["claimed"] = [true]
+    }
+
+    if ( this.showOnlyUnclaimed && this.showOnlyClaimed ) {
+      console.log('You can\'t show only unclaimed and only claimed at the same time. Remove one of the attributes to the <smm-conversation-list> element.');
+    }
+
+    if ( this.showOnlyMyConversations ) {
+      query["claimed_by"] = [this.userid]
+    }
+
+    if ( this.showOnlyContactConversations) {
+      query["contacts"] = [this.showOnlyContactConversations]
+
+    }
+
     const response = await window.makeRequestOnPosts( 'GET', `smm_conversation`, query)
     this.conversations = response.posts;
   }
@@ -124,20 +155,17 @@ export class conversationList extends DtBase {
   }
 
   _headerRender () {
-    const pages = Math.ceil(this.conversations.length/this.perPage);
-    if (pages > 1) {
       return html`
       <span class="smm-list-header-text">
       <smm-search id="convoListSearch" name="convoListSearch" value="" type="text" requiredmessage="" privatelabel="" onchange="" internals-valid="" aria-invalid="false"></smm-search>
       </span>
       `;
-    }
   }
 
   render() {
     return html`
       <div class="smm-list-header">
-        ${this._headerRender()}
+        ${!this.showOnlyCurrentConversation ? this._headerRender() : ``}
       </div>
       <ul class="smm-conversation-list">
       ${repeat(
