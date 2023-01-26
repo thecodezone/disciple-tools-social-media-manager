@@ -13,7 +13,7 @@ class Disciple_Tools_Social_Media_Manager_Magic_Link extends DT_Magic_Url_Base {
     public $page_description = 'Post Type - Magic Links.';
     public $root = 'starter_magic_app'; // @todo define the root of the url {yoursite}/root/type/key/action
     public $type = 'starter_magic_type'; // @todo define the type
-    public $post_type = 'sm_conversation'; // @todo set the post type this magic link connects with.
+    public $post_type = 'smm_conversation'; // @todo set the post type this magic link connects with.
     private $meta_key = '';
     public $show_bulk_send = false;
     public $show_app_tile = true; // show this magic link in the Apps tile on the post record

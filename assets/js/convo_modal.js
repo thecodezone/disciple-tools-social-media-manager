@@ -46,7 +46,6 @@ export class conversationModal extends DtModal {
       aria-label="Open reveal"
       type="button"
       @click="${this._openModal}"
-      style=""
     >
       <slot name="openButton">${msg('Open Dialog')}</slot>
     </button>

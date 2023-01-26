@@ -6,3 +6,4 @@ import "./convo_modal.js";
 import "./chat/chat_window.js";
 import "./chat/chat_message.js";
 import "./dt-icon.js";
+import "./convo_list_search.js";

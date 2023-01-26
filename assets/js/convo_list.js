@@ -4,6 +4,7 @@ import {classMap} from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { msg } from '@lit/localize';
 import { DtBase } from "@disciple.tools/web-components";
+import ApiService from "@disciple.tools/web-components";
 
 
 
@@ -15,6 +16,7 @@ export class conversationList extends DtBase {
       offset: { type: Number},
       perPage: { type: Number},
       userid: { type: Number},
+      showOnlyUnclaimed: { type: Boolean},
     };
   }
 
@@ -60,6 +62,26 @@ export class conversationList extends DtBase {
     `
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('search', this._handleSearch);
+  }
+  disconnectedCallback() {
+    window.removeEventListener('search', this._handleSearch);
+    super.disconnectedCallback();
+  }
+
+  //this has to be an arrow function so that the this keyword is bound to the component class
+  _handleSearch = async (e) => {
+    if (e.target !== this) {
+      return;
+    }
+    e.target === e.currentTarget ? 'container' : e.target.textContent;
+    let query = {"text":e.detail.value,"sort":"last_modified", "claimed": [this.showOnlyUnclaimed ? false : true]}
+    const response = await window.makeRequestOnPosts( 'GET', `smm_conversation`, query)
+    this.conversations = response.posts;
+  }
+
   _paginationRender () {
     const pages = Math.ceil(this.conversations.length/this.perPage);
     if (pages > 1){
@@ -101,8 +123,22 @@ export class conversationList extends DtBase {
     return html`${buttons}`
   }
 
+  _headerRender () {
+    const pages = Math.ceil(this.conversations.length/this.perPage);
+    if (pages > 1) {
+      return html`
+      <span class="smm-list-header-text">
+      <smm-search id="convoListSearch" name="convoListSearch" value="" type="text" requiredmessage="" privatelabel="" onchange="" internals-valid="" aria-invalid="false"></smm-search>
+      </span>
+      `;
+    }
+  }
+
   render() {
     return html`
+      <div class="smm-list-header">
+        ${this._headerRender()}
+      </div>
       <ul class="smm-conversation-list">
       ${repeat(
           this.conversations,
