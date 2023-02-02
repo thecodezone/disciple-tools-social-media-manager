@@ -102,7 +102,7 @@ class Disciple_Tools_Social_Media_Manager {
             require_once( 'tile/settings-tile.php' ); // add custom settings page tile
         }
         /* Checks if the Disciple Tools Dashboard plugin is installed and activated before creating dashboard tiles.*/
-        if( in_array( 'disciple-tools-dashboard/disciple-tools-dashboard.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+        if ( in_array( 'disciple-tools-dashboard/disciple-tools-dashboard.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
             if ( 'dashboard' === dt_get_url_path() && ! $is_rest ) {
                 require_once( 'tile/dashboard-my-convo-tile.php' ); // add custom dashboard tile
                 require_once( 'tile/dashboard-unclaimed-convo-tile.php' ); // add custom dashboard tile
